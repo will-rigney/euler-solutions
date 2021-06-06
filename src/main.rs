@@ -7,6 +7,42 @@ fn main() {
         problem_2()
     );
     println!("largest prime factor of 600851475143: {}", problem_3());
+    println!(
+        "largest palindrome number that is product of two 3 digit numbers: {}",
+        problem_4()
+    );
+}
+
+fn problem_4() -> i64 {
+    // palindrome test
+    fn is_palindrome(n: i64) -> bool {
+        let mut a = n;
+        let mut b = 0;
+        // for each of the digits in the input
+        while a > 0 {
+            // t is the next digit
+            let t = a % 10;
+            // move current digits up one and add new digit on the right
+            b = (b * 10) + t;
+            // move to next digit
+            a /= 10;
+        }
+        // if reversed is equal to original it is palindrome
+        n == b
+    }
+
+    // brute force
+    // having a fast pc and a nice compiler makes this easier
+    let mut result = 0;
+    for x in (100..999).rev() {
+        for y in (100..999).rev() {
+            let product = x * y;
+            if product > result && is_palindrome(product) {
+                result = product;
+            }
+        }
+    }
+    result
 }
 
 fn problem_3() -> i64 {
