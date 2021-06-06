@@ -15,6 +15,28 @@ fn main() {
         "smallest positive number divisible by all numbers from 1 to 20: {}",
         problem_5()
     );
+    println!(
+        "difference between sum of squares and square of sum of numbers from 1 to 100: {}",
+        problem_6()
+    );
+}
+
+fn problem_6() -> i64 {
+    let max = 100;
+
+    // get the sum of the squares
+    let sum_squares: i64 = (1..=max)
+        .map(|x| x * x)
+        .reduce(|a, b| a + b)
+        .expect("couldn't sum squares");
+
+    // get the square of the sum
+    let square_sum: i64 = (1..=max)
+        .reduce(|a, b| a + b)
+        .expect("couldn't square sums")
+        .pow(2);
+
+    (square_sum - sum_squares).abs()
 }
 
 fn problem_5() -> i64 {
