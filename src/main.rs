@@ -11,6 +11,33 @@ fn main() {
         "largest palindrome number that is product of two 3 digit numbers: {}",
         problem_4()
     );
+    println!(
+        "smallest positive number divisible by all numbers from 1 to 20: {}",
+        problem_5()
+    );
+}
+
+fn problem_5() -> i64 {
+    // test if a number n is divisible by all numbers from 1 to max
+    fn test_divisible(n: i64, max: i64) -> bool {
+        for i in (2..max).rev() {
+            if n % i != 0 {
+                return false;
+            }
+        }
+        true
+    }
+
+    // brute force
+    let max = 20;
+    let mut result = 20;
+    loop {
+        if test_divisible(result, max) {
+            return result;
+        } else {
+            result += 20;
+        }
+    }
 }
 
 fn problem_4() -> i64 {
