@@ -19,6 +19,44 @@ fn main() {
         "difference between sum of squares and square of sum of numbers from 1 to 100: {}",
         problem_6()
     );
+    println!("10001st prime: {}", problem_7());
+}
+
+fn problem_7() -> i64 {
+    // test if n can be divided by any of the entries in `primes`
+    fn is_prime(n: i64, primes: &[i64]) -> bool {
+        // get truncated square
+        let sqrt = (n as f64).sqrt() as i64;
+        for i in primes {
+            // not a prime
+            if n % i == 0 {
+                return false;
+            }
+            // only test up to the square root
+            if i > &sqrt {
+                return true;
+            }
+        }
+        true
+    }
+
+    // current number
+    let mut n = 3;
+
+    // keep a list of primes we've seen in our gigabytes of ram
+    let mut primes = vec![3]; // always odd numbers
+
+    // skip the number 2 for less divisions
+    while primes.len() < 10001 - 1 {
+        // next odd number
+        n += 2;
+        // check if i n is prime by dividing it by all of our other primes
+        if is_prime(n, &primes) {
+            // add it to the list
+            primes.push(n);
+        }
+    }
+    *primes.last().unwrap()
 }
 
 fn problem_6() -> i64 {
