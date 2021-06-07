@@ -28,6 +28,49 @@ fn main() {
         "product of pythagorean triple whose sum is 1000: {}",
         problem_9()
     );
+    println!("sum of all primes under 2 million: {}", problem_10());
+}
+
+fn problem_10() -> i64 {
+    // very similar to solution to problem 7
+    // test if n can be divided by any of the entries in `primes`
+    fn is_prime(n: i64, primes: &[i64]) -> bool {
+        // get truncated square
+        let sqrt = (n as f64).sqrt() as i64;
+        for i in primes {
+            // not a prime
+            if n % i == 0 {
+                return false;
+            }
+            // only test up to the square root
+            if i > &sqrt {
+                return true;
+            }
+        }
+        true
+    }
+
+    let max = 2000000;
+
+    // current number
+    let mut n = 3;
+
+    // keep a list of primes we've seen in our gigabytes of ram
+    let mut primes = vec![3]; // always odd numbers
+
+    // skip the number 2 for less divisions
+    while n < max {
+        // next odd number
+        n += 2;
+        // check if i n is prime by dividing it by all of our other primes
+        if is_prime(n, &primes) {
+            // add it to the list
+            primes.push(n);
+        }
+    }
+    // add the first prime
+    primes.push(2);
+    primes.iter().sum()
 }
 
 fn problem_9() -> i64 {
