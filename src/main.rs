@@ -24,6 +24,47 @@ fn main() {
         "product of 13 adjacent digits in the 1000 digit number with the greatest product: {}",
         problem_8()
     );
+    println!(
+        "product of pythagorean triple whose sum is 1000: {}",
+        problem_9()
+    );
+}
+
+fn problem_9() -> i64 {
+    let mut squares = vec![];
+
+    // add each square
+    let mut n: i64 = 1;
+
+    while n < 1000 {
+        squares.push(n.pow(2));
+        n += 1;
+    }
+
+    // consider each possible c from largest to smallest
+    for (c, c_sq) in squares.iter().enumerate().rev() {
+        // only a < c
+        for (b, b_sq) in squares.iter().enumerate().take(c) {
+            // we're using the index which is 0 indexed
+            let b = (b + 1) as i64;
+            let c = (c + 1) as i64;
+
+            let a = 1000 - c - b;
+
+            // a must be positive
+            if a < 0 {
+                continue;
+            }
+
+            let a_sq = a.pow(2);
+
+            // only 1 possible triple
+            if *c_sq == a_sq + b_sq {
+                return a * b * c;
+            }
+        }
+    }
+    panic!("triplet not found")
 }
 
 fn problem_8() -> i64 {
