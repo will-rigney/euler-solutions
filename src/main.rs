@@ -1,4 +1,6 @@
+mod problems_11_20;
 mod problems_1_10;
+use problems_11_20::*;
 use problems_1_10::*;
 
 fn main() {
@@ -30,4 +32,9 @@ fn main() {
         problem_9()
     );
     println!("sum of all primes under 2 million: {}", problem_10());
+
+    println!(
+        "greatest product of 4 numbers in each direction of 20 x 20 array: {}",
+        problem_11()
+    );
 }
