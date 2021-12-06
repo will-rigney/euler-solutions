@@ -1,4 +1,4 @@
-// largest product in a grid
+/// largest product in a hardcoded grid
 pub fn problem_11() -> i32 {
     let array = [
         [08, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 08],
@@ -29,7 +29,6 @@ pub fn problem_11() -> i32 {
     for (y, row) in array.iter().enumerate() {
         for (x, _) in row.iter().enumerate() {
             // find product of four to the right
-            // x + 3 < row.len
             if x + 3 < row.len() {
                 let product = array[y][x] * array[y][x + 1] * array[y][x + 2] * array[y][x + 3];
                 greatest_product = greatest_product.max(product);
@@ -57,4 +56,28 @@ pub fn problem_11() -> i32 {
         }
     }
     greatest_product
+}
+
+/// first triangle number with over 500 divisors
+pub fn problem_12() -> i32 {
+    // count the number of divisors for the input number (naive version)
+    fn count_divisors(n: i32) -> i32 {
+        let mut count = 0;
+        for i in 1..((n as f32).sqrt() as i32) {
+            if n % i == 0 {
+                // don't count equal divisors twice
+                count += if n / i == i { 1 } else { 2 }
+            }
+        }
+        count
+    }
+
+    let mut triangle_number = 0;
+    for i in 1.. {
+        triangle_number += i;
+        if count_divisors(triangle_number) > 500 {
+            break;
+        }
+    }
+    triangle_number
 }

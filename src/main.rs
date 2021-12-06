@@ -37,4 +37,9 @@ fn main() {
         "greatest product of 4 numbers in each direction of 20 x 20 array: {}",
         problem_11()
     );
+
+    println!(
+        "first triangle number with over 500 divisors: {}",
+        problem_12()
+    );
 }
