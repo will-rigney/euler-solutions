@@ -47,4 +47,9 @@ fn main() {
         "starting number of longest collatz sequence under one million: {}",
         problem_14()
     );
+
+    println!(
+        "lattice paths in 20x20 grid: {}",
+        problem_15()
+    );
 }
