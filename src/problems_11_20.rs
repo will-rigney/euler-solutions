@@ -117,7 +117,6 @@ pub fn problem_14() -> u64 {
 
 /// lattice paths in 20x20 grid
 pub fn problem_15() -> i64 {
-
     // there are always n left movements & n down movements for n x n grid
     // i.e. for each given step, we can take one of n left movements or
     // one of n down movements
@@ -133,7 +132,7 @@ pub fn problem_15() -> i64 {
         let k = k.min(n - k);
         (1..=k)
             // (n + 1 - i) / i
-            .map(|i| {(n + 1 - i) as f64 / i as f64 })
+            .map(|i| (n + 1 - i) as f64 / i as f64)
             .product::<f64>() as i64
     }
     binomial(2 * n, n)
