@@ -81,3 +81,36 @@ pub fn problem_12() -> i32 {
     }
     triangle_number
 }
+
+/// starting number of longest collatz sequence under one million
+pub fn problem_14() -> u64 {
+    /// returns next term in collatz sequence given current term `n`
+    fn collatz_step(n: u64) -> u64 {
+        if n & 0b1 == 1 {
+            3 * n + 1
+        } else {
+            n / 2
+        }
+    }
+
+    // highest starting number
+    let mut result = 0;
+
+    // highest number of terms seen
+    let mut max = 0;
+
+    for s in 1..1_000_000 {
+        let mut n = s;
+        let mut i = 0;
+        while n != 1 {
+            // increment number of terms
+            i += 1;
+            n = collatz_step(n);
+        }
+        if i > max {
+            max = i;
+            result = s;
+        }
+    }
+    result
+}

@@ -42,4 +42,9 @@ fn main() {
         "first triangle number with over 500 divisors: {}",
         problem_12()
     );
+
+    println!(
+        "starting number of longest collatz sequence under one million: {}",
+        problem_14()
+    );
 }
