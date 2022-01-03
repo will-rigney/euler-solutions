@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 ansi_term = "0.12.1"
+clap = { version = "3.0.0", features = ["derive"] }
