@@ -53,4 +53,6 @@ fn main() {
     );
 
     print_problem("15. lattice paths in 20x20 grid:", problem_15());
+
+    print_problem("16. sum of digits in 2^1000:", problem_16());
 }

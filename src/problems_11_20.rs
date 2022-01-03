@@ -137,3 +137,39 @@ pub fn problem_15() -> i64 {
     }
     binomial(2 * n, n)
 }
+
+/// sum of digits in 2^1000
+pub fn problem_16() -> u64 {
+    // 500 digits probably enough
+    let mut digits = [0; 500];
+
+    // start with 2^0
+    digits[0] = 1;
+
+    // highest seen column (skip evaluating past this point)
+    let mut highest_column = 0;
+
+    // multiply by 2 999 times
+    for _ in 1..=1000 {
+        // current value of the carry
+        let mut carry = 0;
+        // index of current digit
+        let mut i = 0;
+
+        while i <= highest_column {
+            // current digit * 2 + carry
+            let product = 2 * digits[i] + carry;
+            // update digit
+            digits[i] = product % 10;
+            // update carry
+            carry = product / 10;
+            // next column
+            if i == highest_column && carry > 0 {
+                highest_column += 1;
+            }
+            // increment index
+            i += 1;
+        }
+    }
+    digits.iter().sum()
+}
