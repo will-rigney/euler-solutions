@@ -173,3 +173,73 @@ pub fn problem_16() -> u64 {
     }
     digits.iter().sum()
 }
+
+/// number of characters in 1-1000 (inclusive) written as words
+pub fn problem_17() -> u64 {
+    // numbers 1-9
+    let numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
+    // 10 - 19
+    let teens = [
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+    ];
+
+    // 20 - 90 by 10
+    let decades = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+    let hundred = "hundred";
+    let and = "and";
+
+    let mut count = 0;
+
+    // total letters in numbers 1-99
+    let mut hundred_count = 0;
+
+    // 1-9
+    for number in numbers {
+        hundred_count += number.len() as u64;
+    }
+
+    // 10 - 19
+    for teen in teens {
+        hundred_count += teen.len() as u64;
+    }
+
+    for decade in decades {
+        hundred_count += decade.len() as u64;
+        for number in numbers {
+            hundred_count += (decade.len() + number.len()) as u64;
+        }
+    }
+
+    // 1 - 99
+    count += hundred_count;
+
+    for number in numbers {
+        // add "<number> hundred"
+        // e.g. "one hundred"
+        count += (number.len() + hundred.len()) as u64;
+        // add "<number> hundred and 99x"
+        // e.g. "one hundred and"
+        let hundreds = (number.len() + hundred.len() + and.len()) as u64;
+
+        // number of digits in 1-99
+        count += hundred_count;
+        // 99 * "<number> hundred and"
+        count += hundreds * 99;
+    }
+
+    // 1000
+    count += "onethousand".len() as u64;
+
+    count
+}
