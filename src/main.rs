@@ -22,7 +22,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let n_problems = 17;
+    let n_problems = 18;
 
     // problems to solve
     let problems = match args.problem {
@@ -78,6 +78,7 @@ fn main() {
         15 => print_problem("15. lattice paths in 20x20 grid:", problem_15()),
         16 => print_problem("16. sum of digits in 2^1000:", problem_16()),
         17 => print_problem("17. number of characters in 1-1000 (inclusive) written as words:", problem_17()),
+        18 => print_problem("18. maximum top to bottom path in 15 row triangle:", problem_18()),
         _ => print_missing(format!("no solution for problem {}", problem))
         }
     }
