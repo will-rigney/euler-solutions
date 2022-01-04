@@ -1,11 +1,11 @@
 [package]
 name = "euler-solutions"
-version = "0.1.0"
-authors = ["will <will@wrign.xyz>"]
+version = "0.0.0"
+authors = ["will <william@rigney.com.au>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+# terminal colours
 ansi_term = "0.12.1"
+# argument parsing
 clap = { version = "3.0.0", features = ["derive"] }
