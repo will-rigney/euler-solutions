@@ -277,3 +277,105 @@ pub fn problem_18() -> u64 {
     // top of the triangle is the answer
     triangle[0][0]
 }
+
+/// number of sundays in 20th century
+pub fn problem_19() -> u64 {
+    // days, expressed as ints
+    #[derive(PartialEq, Eq, Debug)]
+    enum Day {
+        Monday = 0,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday,
+    }
+
+    // could use strum for this but I won't
+    impl From<u64> for Day {
+        fn from(d: u64) -> Self {
+            match d {
+                0 => Day::Monday,
+                1 => Day::Tuesday,
+                2 => Day::Wednesday,
+                3 => Day::Thursday,
+                4 => Day::Friday,
+                5 => Day::Saturday,
+                6 => Day::Sunday,
+                _ => panic!("trying to create Day from int out of bounds {}", &d),
+            }
+        }
+    }
+
+    #[derive(Debug)]
+    enum Months {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December,
+    }
+
+    impl Months {
+        fn n_days(&self, is_leap_year: bool) -> u64 {
+            match self {
+                Self::February => {
+                    if is_leap_year {
+                        29
+                    } else {
+                        28
+                    }
+                } // add one for leap years
+                Self::September | Self::April | Self::June | Self::November => 30,
+                _ => 31,
+            }
+        }
+    }
+
+    // could also use strum for this
+    let months = [
+        Months::January,
+        Months::February,
+        Months::March,
+        Months::April,
+        Months::May,
+        Months::June,
+        Months::July,
+        Months::August,
+        Months::September,
+        Months::October,
+        Months::November,
+        Months::December,
+    ];
+
+    let mut count = 0;
+
+    // 1st january 1901 was a tuesday
+    let mut first_of_month = Day::Tuesday;
+
+    // years from 1901 - 2000
+    for year in 1..=100 {
+        // leap year
+        let is_leap_year = year % 4 == 0;
+        for month in &months {
+            // check first of month
+            if first_of_month == Day::Sunday {
+                count += 1;
+            }
+            // number of days in month
+            let n_days = month.n_days(is_leap_year);
+            // update to first of next month
+            let day_index = first_of_month as u64;
+            first_of_month = Day::from((day_index + n_days) % 7);
+        }
+    }
+    count
+}
