@@ -140,8 +140,8 @@ pub fn problem_15() -> i64 {
 
 /// sum of digits in 2^1000
 pub fn problem_16() -> u64 {
-    // 500 digits probably enough
-    let mut digits = [0; 500];
+    // previous runs say 302 is enough
+    let mut digits = [0; 302];
 
     // start with 2^0
     digits[0] = 1;
@@ -378,4 +378,41 @@ pub fn problem_19() -> u64 {
         }
     }
     count
+}
+
+/// sum of digits in the number 100!
+pub fn problem_20() -> u64 {
+    // same as problem 16 - use long multiplication
+    // 158 digits is enough
+    let mut digits = [0; 158];
+
+    // start with 1
+    digits[0] = 1;
+
+    // highest seen column (skip evaluating past this point)
+    let mut highest_column = 0;
+
+    // 100 factorial long multiplication
+    for n in (1..100).rev() {
+        // current value of the carry
+        let mut carry = 0;
+        // index of current digit
+        let mut i = 0;
+
+        while i <= highest_column {
+            // current digit * 2 + carry
+            let product = n * digits[i] + carry;
+            // update digit
+            digits[i] = product % 10;
+            // update carry
+            carry = product / 10;
+            // next column
+            if i == highest_column && carry > 0 {
+                highest_column += 1;
+            }
+            // increment index
+            i += 1;
+        }
+    }
+    digits.iter().sum()
 }
