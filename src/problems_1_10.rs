@@ -180,25 +180,26 @@ pub fn problem_6() -> i64 {
     (square_sum - sum_squares).abs()
 }
 
+/// smallest positive number divisible by all numbers from 1 to 20
 pub fn problem_5() -> i64 {
-    // test if a number n is divisible by all numbers from 1 to max
+    /// test if a number n is divisible by all numbers from 2 to max
     fn test_divisible(n: i64, max: i64) -> bool {
-        for i in (2..max).rev() {
+        for i in (2..=max).rev() {
             if n % i != 0 {
                 return false;
             }
         }
         true
     }
-
     // brute force
     let max = 20;
-    let mut result = 20;
+    // answer will also be divisible by 2520 (smallest number divisible by 1-10)
+    let mut result = 2520;
     loop {
         if test_divisible(result, max) {
             return result;
         } else {
-            result += 20;
+            result += 2520;
         }
     }
 }
