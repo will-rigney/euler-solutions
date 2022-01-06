@@ -1,5 +1,162 @@
-pub fn problem_10() -> i64 {
-    // very similar to solution to problem 7
+/// sum of multiples of 3 or 5 under 1000
+pub fn problem_1() -> u64 {
+    let mut sum = 0;
+    // dumb brute force way
+    for i in 0..1000 {
+        if i % 3 == 0 || i % 5 == 0 {
+            sum += i;
+        }
+    }
+    sum
+}
+
+/// sum of even values of fibonacci sequence under 4 million
+pub fn problem_2() -> u64 {
+    // sum of even values of fibonacci sequence under 4 million:
+    let mut sum = 0;
+    let mut a = 1;
+    let mut b = 1;
+    let mut result = 0;
+    while result < 4000000 {
+        result = a + b;
+        a = b;
+        b = result;
+
+        // check a number is even
+        if (result & 1) == 0 {
+            sum += result;
+        }
+    }
+
+    sum
+}
+
+/// largest prime factor of 600851475143
+pub fn problem_3() -> i64 {
+    let n = 600851475143;
+
+    // prime test
+    fn is_prime(n: i64) -> bool {
+        // get the truncated square root
+        let mut m = (n as f64).sqrt() as i64;
+
+        while m > 1 {
+            if n % m == 0 {
+                // not prime
+                return false;
+            }
+            m -= 1;
+        }
+        true
+    }
+
+    let sqrt = (n as f64).sqrt() as i64;
+
+    let mut i = 2;
+    let mut highest_prime_lower_divisor = 1;
+
+    // while i is less than the square root of n
+    while i < sqrt {
+        // if n is divisible by i
+        if n % i == 0 {
+            // if i is prime we save it for later
+            if is_prime(i) {
+                highest_prime_lower_divisor = i;
+            }
+            // get the divisor
+            let j = n / i;
+            // check if it's prime
+            if is_prime(j) {
+                // this must be the largest prime factor
+                return j;
+            }
+        }
+
+        // increment i
+        i += 1;
+    }
+    // return the highest prime divisor we had seen so far
+    highest_prime_lower_divisor
+}
+
+/// largest palindrome number that is product of two 3 digit numbers
+pub fn problem_4() -> i64 {
+    // palindrome test
+    fn is_palindrome(n: i64) -> bool {
+        let mut a = n;
+        let mut b = 0;
+        // for each of the digits in the input
+        while a > 0 {
+            // t is the next digit
+            let t = a % 10;
+            // move current digits up one and add new digit on the right
+            b = (b * 10) + t;
+            // move to next digit
+            a /= 10;
+        }
+        // if reversed is equal to original it is palindrome
+        n == b
+    }
+
+    // brute force
+    // having a fast pc and a nice compiler makes this easier
+    let mut result = 0;
+    for x in (100..999).rev() {
+        for y in (100..999).rev() {
+            let product = x * y;
+            if product > result && is_palindrome(product) {
+                result = product;
+            }
+        }
+    }
+    result
+}
+
+/// smallest positive number divisible by all numbers from 1 to 20
+pub fn problem_5() -> i64 {
+    /// test if a number n is divisible by all numbers from 2 to max
+    fn test_divisible(n: i64, max: i64) -> bool {
+        for i in (2..=max).rev() {
+            if n % i != 0 {
+                return false;
+            }
+        }
+        true
+    }
+    // brute force
+    let max = 20;
+    // answer will also be divisible by 2520 (smallest number divisible by 1-10)
+    let mut result = 2520;
+    loop {
+        if test_divisible(result, max) {
+            return result;
+        } else {
+            result += 2520;
+        }
+    }
+}
+
+/// difference between sum of squares and square of sum of numbers from 1 to 100
+pub fn problem_6() -> i64 {
+    let max = 100;
+
+    // get the sum of the squares
+    let sum_squares: i64 = (1..=max)
+        .map(|x| x * x)
+        .reduce(|a, b| a + b)
+        .expect("couldn't sum squares");
+
+    // get the square of the sum
+    let square_sum: i64 = (1..=max)
+        .reduce(|a, b| a + b)
+        .expect("couldn't square sums")
+        .pow(2);
+
+    (square_sum - sum_squares).abs()
+}
+
+/// 10001st prime
+pub fn problem_7() -> i64 {
     // test if n can be divided by any of the entries in `primes`
     fn is_prime(n: i64, primes: &[i64]) -> bool {
         // get truncated square
@@ -17,8 +174,6 @@ pub fn problem_10() -> i64 {
         true
     }
 
-    let max = 2000000;
-
     // current number
     let mut n = 3;
 
@@ -26,7 +181,7 @@ pub fn problem_10() -> i64 {
     let mut primes = vec![3]; // always odd numbers
 
     // skip the number 2 for less divisions
-    while n < max {
+    while primes.len() < 10001 - 1 {
         // next odd number
         n += 2;
         // check if i n is prime by dividing it by all of our other primes
@@ -35,48 +190,10 @@ pub fn problem_10() -> i64 {
             primes.push(n);
         }
     }
-    // add the first prime
-    primes.push(2);
-    primes.iter().sum()
+    *primes.last().unwrap()
 }
 
-pub fn problem_9() -> i64 {
-    let mut squares = vec![];
-
-    // add each square
-    let mut n: i64 = 1;
-
-    while n < 1000 {
-        squares.push(n.pow(2));
-        n += 1;
-    }
-
-    // consider each possible c from largest to smallest
-    for (c, c_sq) in squares.iter().enumerate().rev() {
-        // only a < c
-        for (b, b_sq) in squares.iter().enumerate().take(c) {
-            // we're using the index which is 0 indexed
-            let b = (b + 1) as i64;
-            let c = (c + 1) as i64;
-
-            let a = 1000 - c - b;
-
-            // a must be positive
-            if a < 0 {
-                continue;
-            }
-
-            let a_sq = a.pow(2);
-
-            // only 1 possible triple
-            if *c_sq == a_sq + b_sq {
-                return a * b * c;
-            }
-        }
-    }
-    panic!("triplet not found")
-}
-
+/// product of 13 adjacent digits in the 1000 digit number with the greatest product
 pub fn problem_8() -> i64 {
     // length of sub strings
     let len = 13;
@@ -125,7 +242,47 @@ pub fn problem_8() -> i64 {
     result
 }
 
-pub fn problem_7() -> i64 {
+/// product of pythagorean triple whose sum is 1000
+pub fn problem_9() -> i64 {
+    let mut squares = vec![];
+
+    // add each square
+    let mut n: i64 = 1;
+
+    while n < 1000 {
+        squares.push(n.pow(2));
+        n += 1;
+    }
+
+    // consider each possible c from largest to smallest
+    for (c, c_sq) in squares.iter().enumerate().rev() {
+        // only a < c
+        for (b, b_sq) in squares.iter().enumerate().take(c) {
+            // we're using the index which is 0 indexed
+            let b = (b + 1) as i64;
+            let c = (c + 1) as i64;
+
+            let a = 1000 - c - b;
+
+            // a must be positive
+            if a < 0 {
+                continue;
+            }
+
+            let a_sq = a.pow(2);
+
+            // only 1 possible triple
+            if *c_sq == a_sq + b_sq {
+                return a * b * c;
+            }
+        }
+    }
+    panic!("triplet not found")
+}
+
+/// sum of all primes under 2 million
+pub fn problem_10() -> i64 {
+    // very similar to solution to problem 7
     // test if n can be divided by any of the entries in `primes`
     fn is_prime(n: i64, primes: &[i64]) -> bool {
         // get truncated square
@@ -143,6 +300,8 @@ pub fn problem_7() -> i64 {
         true
     }
 
+    let max = 2000000;
+
     // current number
     let mut n = 3;
 
@@ -150,7 +309,7 @@ pub fn problem_7() -> i64 {
     let mut primes = vec![3]; // always odd numbers
 
     // skip the number 2 for less divisions
-    while primes.len() < 10001 - 1 {
+    while n < max {
         // next odd number
         n += 2;
         // check if i n is prime by dividing it by all of our other primes
@@ -159,157 +318,7 @@ pub fn problem_7() -> i64 {
             primes.push(n);
         }
     }
-    *primes.last().unwrap()
-}
-
-pub fn problem_6() -> i64 {
-    let max = 100;
-
-    // get the sum of the squares
-    let sum_squares: i64 = (1..=max)
-        .map(|x| x * x)
-        .reduce(|a, b| a + b)
-        .expect("couldn't sum squares");
-
-    // get the square of the sum
-    let square_sum: i64 = (1..=max)
-        .reduce(|a, b| a + b)
-        .expect("couldn't square sums")
-        .pow(2);
-
-    (square_sum - sum_squares).abs()
-}
-
-/// smallest positive number divisible by all numbers from 1 to 20
-pub fn problem_5() -> i64 {
-    /// test if a number n is divisible by all numbers from 2 to max
-    fn test_divisible(n: i64, max: i64) -> bool {
-        for i in (2..=max).rev() {
-            if n % i != 0 {
-                return false;
-            }
-        }
-        true
-    }
-    // brute force
-    let max = 20;
-    // answer will also be divisible by 2520 (smallest number divisible by 1-10)
-    let mut result = 2520;
-    loop {
-        if test_divisible(result, max) {
-            return result;
-        } else {
-            result += 2520;
-        }
-    }
-}
-
-pub fn problem_4() -> i64 {
-    // palindrome test
-    fn is_palindrome(n: i64) -> bool {
-        let mut a = n;
-        let mut b = 0;
-        // for each of the digits in the input
-        while a > 0 {
-            // t is the next digit
-            let t = a % 10;
-            // move current digits up one and add new digit on the right
-            b = (b * 10) + t;
-            // move to next digit
-            a /= 10;
-        }
-        // if reversed is equal to original it is palindrome
-        n == b
-    }
-
-    // brute force
-    // having a fast pc and a nice compiler makes this easier
-    let mut result = 0;
-    for x in (100..999).rev() {
-        for y in (100..999).rev() {
-            let product = x * y;
-            if product > result && is_palindrome(product) {
-                result = product;
-            }
-        }
-    }
-    result
-}
-
-pub fn problem_3() -> i64 {
-    let n = 600851475143;
-
-    // prime test
-    fn is_prime(n: i64) -> bool {
-        // get the truncated square root
-        let mut m = (n as f64).sqrt() as i64;
-
-        while m > 1 {
-            if n % m == 0 {
-                // not prime
-                return false;
-            }
-            m -= 1;
-        }
-        true
-    }
-
-    let sqrt = (n as f64).sqrt() as i64;
-
-    let mut i = 2;
-    let mut highest_prime_lower_divisor = 1;
-
-    // while i is less than the square root of n
-    while i < sqrt {
-        // if n is divisible by i
-        if n % i == 0 {
-            // if i is prime we save it for later
-            if is_prime(i) {
-                highest_prime_lower_divisor = i;
-            }
-            // get the divisor
-            let j = n / i;
-            // check if it's prime
-            if is_prime(j) {
-                // this must be the largest prime factor
-                return j;
-            }
-        }
-
-        // increment i
-        i += 1;
-    }
-    // return the highest prime divisor we had seen so far
-    highest_prime_lower_divisor
-}
-
-pub fn problem_2() -> u64 {
-    // sum of even values of fibonacci sequence under 4 million:
-    let mut sum = 0;
-    let mut a = 1;
-    let mut b = 1;
-    let mut result = 0;
-    while result < 4000000 {
-        result = a + b;
-        a = b;
-        b = result;
-
-        // check a number is even
-        if (result & 1) == 0 {
-            sum += result;
-        }
-    }
-
-    sum
-}
-
-pub fn problem_1() -> u64 {
-    let mut sum = 0;
-    // dumb brute force way
-    for i in 0..1000 {
-        if i % 3 == 0 || i % 5 == 0 {
-            sum += i;
-        }
-    }
-    sum
+    // add the first prime
+    primes.push(2);
+    primes.iter().sum()
 }
