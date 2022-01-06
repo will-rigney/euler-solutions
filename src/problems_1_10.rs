@@ -27,7 +27,6 @@ pub fn problem_2() -> u64 {
             sum += result;
         }
     }
-
     sum
 }
 
@@ -281,12 +280,13 @@ pub fn problem_9() -> i64 {
 }
 
 /// sum of all primes under 2 million
-pub fn problem_10() -> i64 {
+pub fn problem_10() -> u64 {
     // very similar to solution to problem 7
     // test if n can be divided by any of the entries in `primes`
-    fn is_prime(n: i64, primes: &[i64]) -> bool {
+    fn is_prime(n: i32, primes: &[i32]) -> bool {
         // get truncated square
-        let sqrt = (n as f64).sqrt() as i64;
+        // this is probably slow but can't see an integer only alternative
+        let sqrt = (n as f32).sqrt() as i32;
         for i in primes {
             // not a prime
             if n % i == 0 {
@@ -300,15 +300,17 @@ pub fn problem_10() -> i64 {
         true
     }
 
-    let max = 2000000;
+    let max = 2_000_000;
 
     // current number
     let mut n = 3;
 
     // keep a list of primes we've seen in our gigabytes of ram
-    let mut primes = vec![3]; // always odd numbers
+    // capacity hint is from previous run
+    let mut primes = Vec::with_capacity(148933);
+    // skip 2 for less divisions (todo: more optimisations)
+    primes.push(3);
 
-    // skip the number 2 for less divisions
     while n < max {
         // next odd number
         n += 2;
@@ -320,5 +322,5 @@ pub fn problem_10() -> i64 {
     }
     // add the first prime
     primes.push(2);
-    primes.iter().sum()
+    primes.iter().map(|i| *i as u64).sum()
 }
