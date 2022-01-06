@@ -283,7 +283,7 @@ pub fn problem_19() -> u64 {
     // days, expressed as ints
     #[derive(PartialEq, Eq, Debug)]
     enum Day {
-        Monday = 0,
+        Monday,
         Tuesday,
         Wednesday,
         Thursday,
