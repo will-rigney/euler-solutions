@@ -6,6 +6,9 @@ use print::*;
 use problems_11_20::*;
 use problems_1_10::*;
 
+#[cfg(test)]
+mod test;
+
 #[derive(Parser, Debug)]
 #[clap(
     about = "Solutions to problems at https://projecteuler.net/ implemented in Rust.",
