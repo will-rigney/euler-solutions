@@ -113,26 +113,17 @@ pub fn problem_4() -> i64 {
 
 /// smallest positive number divisible by all numbers from 1 to 20
 pub fn problem_5() -> i64 {
-    /// test if a number n is divisible by all numbers from 2 to max
-    fn test_divisible(n: i64, max: i64) -> bool {
-        for i in (2..=max).rev() {
-            if n % i != 0 {
-                return false;
-            }
-        }
-        true
+    /// test if a number n is divisible by all numbers 11 - 20
+    fn test_divisible(n: i64) -> bool {
+        !(11..=20).any(|i| n % i != 0)
     }
-    // brute force
-    let max = 20;
+
     // answer will also be divisible by 2520 (smallest number divisible by 1-10)
     let mut result = 2520;
-    loop {
-        if test_divisible(result, max) {
-            return result;
-        } else {
-            result += 2520;
-        }
+    while !test_divisible(result) {
+        result += 2520;
     }
+    result
 }
 
 /// difference between sum of squares and square of sum of numbers from 1 to 100
