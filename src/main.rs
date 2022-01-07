@@ -1,10 +1,12 @@
 mod print;
 mod problems_11_20;
 mod problems_1_10;
+mod problems_21_30;
 use clap::Parser;
 use print::*;
 use problems_11_20::*;
 use problems_1_10::*;
+use problems_21_30::*;
 
 #[cfg(test)]
 mod test;
@@ -30,7 +32,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let n_problems = 20;
+    let n_problems = 21;
 
     // problems to solve
     let problems = match args.problem {
@@ -91,6 +93,7 @@ fn main() {
         18 => p.print_problem("18. maximum top to bottom path in 15 row triangle:", &problem_18),
         19 => p.print_problem("19. number of sundays in 20th century:", &problem_19),
         20 => p.print_problem("20. sum of digits in the number 100!:", &problem_20),
+        21 => p.print_problem("21. sum of amicable numbers under 10 000:", &problem_21),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }
