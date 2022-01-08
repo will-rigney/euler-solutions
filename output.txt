@@ -1,0 +1,23 @@
+[1;34mEuler Project Solutions[0m
+1. sum of multiples of 3 or 5 under 1000: [1;35m******[0m, time: [1;36m<1 ms[0m
+2. sum of even values of fibonacci sequence under 4 million: [1;35m*******[0m, time: [1;36m<1 ms[0m
+3. largest prime factor of 600851475143: [1;35m****[0m, time: [1;36m11 ms[0m
+4. largest palindrome number that is product of two 3 digit numbers: [1;35m******[0m, time: [1;36m<1 ms[0m
+5. smallest positive number divisible by all numbers from 1 to 20: [1;35m*********[0m, time: [1;36m<1 ms[0m
+6. difference between sum of squares and square of sum of numbers from 1 to 100: [1;35m********[0m, time: [1;36m<1 ms[0m
+7. 10001st prime: [1;35m******[0m, time: [1;36m5 ms[0m
+8. product of 13 adjacent digits in the 1000 digit number with the greatest product: [1;35m***********[0m, time: [1;36m<1 ms[0m
+9. product of pythagorean triple whose sum is 1000: [1;35m********[0m, time: [1;36m<1 ms[0m
+10. sum of all primes under 2 million: [1;35m************[0m, time: [1;36m158 ms[0m
+11. greatest product of 4 numbers in each direction of 20 x 20 array: [1;35m********[0m, time: [1;36m<1 ms[0m
+12. first triangle number with over 500 divisors: [1;35m********[0m, time: [1;36m289 ms[0m
+[1;31mno solution for problem 13[0m
+14. starting number of longest collatz sequence under one million: [1;35m******[0m, time: [1;36m259 ms[0m
+15. lattice paths in 20x20 grid: [1;35m************[0m, time: [1;36m<1 ms[0m
+16. sum of digits in 2^1000: [1;35m****[0m, time: [1;36m<1 ms[0m
+17. number of characters in 1-1000 (inclusive) written as words: [1;35m*****[0m, time: [1;36m<1 ms[0m
+18. maximum top to bottom path in 15 row triangle: [1;35m****[0m, time: [1;36m<1 ms[0m
+19. number of sundays in 20th century: [1;35m***[0m, time: [1;36m<1 ms[0m
+20. sum of digits in the number 100!: [1;35m***[0m, time: [1;36m<1 ms[0m
+21. sum of amicable numbers under 10 000: [1;35m*****[0m, time: [1;36m8 ms[0m
+22. total of name scores for names in 'p022_names.txt': [1;35m*********[0m, time: [1;36m1 ms[0m
