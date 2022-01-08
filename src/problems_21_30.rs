@@ -1,4 +1,7 @@
-use std::collections::{BTreeMap, HashMap};
+use std::{
+    collections::{BTreeMap, HashMap},
+    fs,
+};
 
 /// sum of amicable numbers under 10000
 pub fn problem_21() -> u64 {
@@ -83,4 +86,26 @@ pub fn problem_21() -> u64 {
         }
     }
     sum as u64
+}
+
+/// total of name scores for names in 'p022_names.txt'
+pub fn problem_22() -> i32 {
+    // todo: better error handling for individual problems
+    let names = fs::read("res/p022_names.txt").expect("error opening names.txt!");
+    // use string slices
+    let mut sorted_names = BTreeMap::<&[u8], i32>::new();
+    // split input by ','
+    for name in names.split(|i| *i == b',') {
+        // calculate alphabetical value
+        // ignores "s as they're less than 64 in byte form
+        let alphabetical_value = name.iter().map(|c| 0.max(*c as i32 - 64)).sum();
+        // insert with name as key (sort for free)
+        sorted_names.insert(name, alphabetical_value);
+    }
+    // find the result
+    sorted_names
+        .iter()
+        .enumerate()
+        .map(|(index, (_, value))| (index as i32 + 1) * value)
+        .sum()
 }
