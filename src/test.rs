@@ -48,10 +48,10 @@ fn test_problem_11() {
 fn test_problem_12() {
     insta::assert_debug_snapshot!(problem_12());
 }
-// #[test]
-// fn test_problem_13() {
-//     insta::assert_debug_snapshot!(problem_13());
-// }
+#[test]
+fn test_problem_13() {
+    insta::assert_debug_snapshot!(problem_13());
+}
 #[test]
 fn test_problem_14() {
     insta::assert_debug_snapshot!(problem_14());

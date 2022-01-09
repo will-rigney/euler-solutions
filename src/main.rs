@@ -83,6 +83,7 @@ fn main() {
             "12. first triangle number with over 500 divisors:",
             &problem_12,
         ),
+        13 => p.print_problem("13. first 10 digits of sum of 100 50 digit numbers:", &problem_13),
         14 => p.print_problem(
             "14. starting number of longest collatz sequence under one million:",
             &problem_14,
