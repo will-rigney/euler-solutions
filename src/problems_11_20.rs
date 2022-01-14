@@ -198,13 +198,7 @@ pub fn problem_13() -> String {
         // todo: better errors
         let sum = array
             .iter()
-            .map(|s| {
-                s.chars()
-                    .nth(i)
-                    .unwrap()
-                    .to_digit(10)
-                    .unwrap()
-            })
+            .map(|s| s.chars().nth(i).unwrap().to_digit(10).unwrap())
             .sum::<u32>()
             + carry;
 
@@ -298,7 +292,7 @@ pub fn problem_16() -> u64 {
     // highest seen column (skip evaluating past this point)
     let mut highest_column = 0;
 
-    // multiply by 2 999 times
+    // multiply by 2 1000 times
     for _ in 1..=1000 {
         // current value of the carry
         let mut carry = 0;

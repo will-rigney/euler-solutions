@@ -14,36 +14,26 @@ pub fn problem_21() -> u64 {
     /// find prime factors for a given n
     /// optimised by / requires passing a previously computed list of primes up to sqrt(n)
     fn factorise(n: i32, primes: &mut Vec<i32>) -> BTreeMap<i32, i32> {
-        /// increment the count for a given prime (or initialise to 1)
-        fn inc(p: i32, factors: &mut BTreeMap<i32, i32>) {
-            if let Some(count) = factors.get_mut(&p) {
-                *count += 1;
-            } else {
-                factors.insert(p, 1);
-            }
-        }
-
         let mut factors = BTreeMap::new();
         let mut n = n;
-
         // loop while n is not fully factorised
         'outer: loop {
             for p in primes.iter() {
                 // if n is an already seen prime, factorisation is complete
                 if n == *p {
-                    inc(*p, &mut factors);
+                    *factors.entry(*p).or_insert(0) += 1;
                     return factors;
                 }
                 // p is a divisor (prime factor) of n
                 if n % *p == 0 {
-                    inc(*p, &mut factors);
+                    *factors.entry(*p).or_insert(0) += 1;
                     n /= *p;
                     continue 'outer;
                 }
             }
             // current n must be prime, add to list & return
             primes.push(n);
-            inc(n, &mut factors);
+            *factors.entry(n).or_insert(0) += 1;
             return factors;
         }
     }
@@ -92,7 +82,7 @@ pub fn problem_21() -> u64 {
 pub fn problem_22() -> i32 {
     // todo: better error handling for individual problems
     let names = fs::read("res/p022_names.txt").expect("error opening names.txt!");
-    // use string slices
+    // use byte slices
     let mut sorted_names = BTreeMap::<&[u8], i32>::new();
     // split input by ','
     for name in names.split(|i| *i == b',') {

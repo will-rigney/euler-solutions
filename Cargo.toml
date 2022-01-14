@@ -15,6 +15,6 @@ insta = "1.10.0"
 
 [dependencies]
 # terminal colours
-ansi_term = "0.12.1"
+colored = "2.0.0"
 # argument parsing
 clap = { version = "3.0.0", features = ["derive"] }

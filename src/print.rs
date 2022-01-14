@@ -1,5 +1,5 @@
-use ansi_term::Colour;
-use ansi_term::Style;
+use colored::*;
+
 use std::fmt::Display;
 use std::time::Instant;
 
@@ -10,7 +10,7 @@ pub struct Printer {
 }
 
 impl Printer {
-    /// Creates a new Printer instance
+    /// Creates a new Printer instance with settings
     pub fn new(should_show_time: bool, should_censor: bool) -> Self {
         Self {
             should_show_time,
@@ -18,10 +18,9 @@ impl Printer {
         }
     }
 
-    /// Print s using a heading style
+    /// Print `s` using a heading style
     pub fn print_heading(s: &str) {
-        let h_style = Style::new().bold().fg(Colour::Blue);
-        println!("{}", h_style.paint(s));
+        println!("{}", s.blue().bold());
     }
 
     /// Runs a function (for a problem) and prints the result.
@@ -32,11 +31,6 @@ impl Printer {
     /// q is the question string
     /// f is the function to run to provide the problem solution
     pub fn print_problem<T: Display>(&self, q: &str, f: &dyn Fn() -> T) {
-        // todo: think this could be better implemented as a proc macro
-        // styles for printing
-        let style = Style::new().bold().fg(Colour::Purple);
-        let time_style = Style::new().bold().fg(Colour::Cyan);
-
         // time & run the problem function
         let start = Instant::now();
         let result = f();
@@ -49,7 +43,7 @@ impl Printer {
             result = "*".repeat(result.len());
         }
         // print the question & answer
-        print!("{} {}", q, style.paint(result));
+        print!("{} {}", q, result.purple().bold());
 
         // print the execution time
         if self.should_show_time {
@@ -58,7 +52,7 @@ impl Printer {
             } else {
                 "<1 ms".to_string()
             };
-            print!(", time: {}", time_style.paint(time));
+            print!(", time: {}", time.red().bold());
         }
 
         // newline
@@ -68,7 +62,6 @@ impl Printer {
     /// Print s using a kind of warning style
     /// Meant to be used to notify that a solution for a given problem is not present
     pub fn print_missing<T: Display>(s: T) {
-        let style = Style::new().bold().fg(Colour::Red);
-        println!("{}", style.paint(format!("{}", s)));
+        println!("{}", format!("{}", s).red().bold());
     }
 }
