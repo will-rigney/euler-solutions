@@ -32,7 +32,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let n_problems = 23;
+    let n_problems = 24;
 
     // problems to solve
     let problems = match args.problem {
@@ -97,6 +97,7 @@ fn main() {
         21 => p.print_problem("21. sum of amicable numbers under 10 000:", &problem_21),
         22 => p.print_problem("22. total of name scores for names in 'p022_names.txt':", &problem_22),
         23 => p.print_problem("23. sum of positive integers that can't be expressed as sum of two abundant numbers:", &problem_23),
+        24 => p.print_problem("24. millionth lexicograghic permutation of 0-9:", &problem_24),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }

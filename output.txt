@@ -8,9 +8,9 @@ Euler Project Solutions
 7. 10001st prime: ******, time: 4 ms
 8. product of 13 adjacent digits in the 1000 digit number with the greatest product: ***********, time: <1 ms
 9. product of pythagorean triple whose sum is 1000: ********, time: <1 ms
-10. sum of all primes under 2 million: ************, time: 139 ms
+10. sum of all primes under 2 million: ************, time: 141 ms
 11. greatest product of 4 numbers in each direction of 20 x 20 array: ********, time: <1 ms
-12. first triangle number with over 500 divisors: ********, time: 254 ms
+12. first triangle number with over 500 divisors: ********, time: 252 ms
 13. first 10 digits of sum of 100 50 digit numbers: **********, time: <1 ms
 14. starting number of longest collatz sequence under one million: ******, time: 231 ms
 15. lattice paths in 20x20 grid: ************, time: <1 ms
@@ -21,4 +21,5 @@ Euler Project Solutions
 20. sum of digits in the number 100!: ***, time: <1 ms
 21. sum of amicable numbers under 10 000: *****, time: 8 ms
 22. total of name scores for names in 'p022_names.txt': *********, time: 1 ms
-23. sum of positive integers that can't be expressed as sum of two abundant numbers: *******, time: 91 ms
+23. sum of positive integers that can't be expressed as sum of two abundant numbers: *******, time: 106 ms
+24. millionth lexicograghic permutation of 0-9: **********, time: <1 ms

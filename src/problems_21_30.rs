@@ -1,6 +1,7 @@
 use std::{
     collections::{BTreeMap, HashMap, HashSet},
     fs,
+    char,
 };
 
 /// sum of amicable numbers under 10000
@@ -181,4 +182,30 @@ pub fn problem_23() -> i32 {
         }
     }
     sum
+}
+
+/// millionth lexicograghic permutation of 0-9
+pub fn problem_24() -> String {
+    /// calculate factorial basic way
+    fn factorial(n: i32) -> i32 {
+        (1..=n).product()
+    }
+
+    let mut numbers: Vec<u32> = (0..=9).collect();
+    let mut n = 1_000_000 - 1;
+    let mut result = "".to_string();
+    let len = numbers.len() as i32;
+
+    for digit in (1..len).rev() {
+        let factorial = factorial(digit);
+        let index = n / factorial;
+        let digit = numbers.remove(index as usize);
+        let char = char::from_digit(digit, 10).unwrap();
+        result.push(char);
+        n -= index * factorial;
+    }
+    let digit = numbers.pop().unwrap();
+    let char = char::from_digit(digit, 10).unwrap();
+    result.push(char);
+    result
 }
