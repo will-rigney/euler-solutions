@@ -5,14 +5,14 @@ Euler Project Solutions
 4. largest palindrome number that is product of two 3 digit numbers: ******, time: <1 ms
 5. smallest positive number divisible by all numbers from 1 to 20: *********, time: <1 ms
 6. difference between sum of squares and square of sum of numbers from 1 to 100: ********, time: <1 ms
-7. 10001st prime: ******, time: 2 ms
+7. 10001st prime: ******, time: 1 ms
 8. product of 13 adjacent digits in the 1000 digit number with the greatest product: ***********, time: <1 ms
 9. product of pythagorean triple whose sum is 1000: ********, time: <1 ms
-10. sum of all primes under 2 million: ************, time: 4 ms
+10. sum of all primes under 2 million: ************, time: 5 ms
 11. greatest product of 4 numbers in each direction of 20 x 20 array: ********, time: <1 ms
 12. first triangle number with over 500 divisors: ********, time: 10 ms
 13. first 10 digits of sum of 100 50 digit numbers: **********, time: <1 ms
-14. starting number of longest collatz sequence under one million: ******, time: 124 ms
+14. starting number of longest collatz sequence under one million: ******, time: 7 ms
 15. lattice paths in 20x20 grid: ************, time: <1 ms
 16. sum of digits in 2^1000: ****, time: <1 ms
 17. number of characters in 1-1000 (inclusive) written as words: *****, time: <1 ms

@@ -233,23 +233,33 @@ pub fn problem_14() -> u64 {
         }
     }
 
-    // highest starting number
+    const MAX: u64 = 1_000_000;
+
+    // cache holds number of steps for each iteration we have seen
+    let mut cache = vec![0; MAX as usize];
+    cache[1] = 1;
+
+    // longest length seen
+    let mut length = 0;
+    // starting number with longest length seen
     let mut result = 0;
 
-    // highest number of terms seen
-    let mut max = 0;
-
-    for s in 1..1_000_000 {
-        let mut n = s;
-        let mut i = 0;
-        while n != 1 {
-            // increment number of terms
-            i += 1;
+    for i in 2..MAX {
+        let mut n = i;
+        let mut s = 0;
+        // while sequence not complete and n greater than already computed value
+        while n!=1 && n >= i {
+            s += 1;
             n = collatz_step(n);
         }
-        if i > max {
-            max = i;
-            result = s;
+
+        // then store the result in cache
+        cache[i as usize] = s + cache[n as usize];
+
+        // check if sequence is the best solution
+        if cache[i as usize] > length {
+            length = cache[i as usize];
+            result = i;
         }
     }
     result
