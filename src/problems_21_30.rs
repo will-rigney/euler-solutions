@@ -99,9 +99,9 @@ pub fn problem_23() -> i32 {
         result - n
     };
 
-    let mut abundant = HashSet::<i32>::new();
+    let mut abundant = HashSet::<i32>::with_capacity(4994);
 
-    // problem states provabe limit is 28123, but it's actually 20161
+    // problem states provable limit is 28123, but it's actually 20161
     let limit = 20161;
 
     // sum of non-abundant sums
@@ -152,4 +152,14 @@ pub fn problem_24() -> String {
     let char = char::from_digit(digit, 10).unwrap();
     result.push(char);
     result
+}
+
+/// index of first term in fibonacci sequence to contain 1000 digits
+pub fn problem_25() -> i32 {
+
+    let num_digits = 1000.0;
+    let phi = (1.0 + 5.0_f32.sqrt()) / 2.0;
+
+    // take base10 log of both sides of Binet's formula & solve for n to find index
+    ((5.0_f32.log10() / 2.0 + num_digits - 1.0) / phi.log10()).ceil() as i32
 }
