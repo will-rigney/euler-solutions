@@ -14,6 +14,8 @@ panic = "abort"
 insta = "1.10.0"
 
 [dependencies]
+# fancy errors
+color-eyre = "0.6.0"
 # terminal colours
 colored = "2.0.0"
 # argument parsing

@@ -8,6 +8,8 @@ use problems_11_20::*;
 use problems_1_10::*;
 use problems_21_30::*;
 
+mod utils;
+
 #[cfg(test)]
 mod test;
 
@@ -30,6 +32,9 @@ struct Args {
 }
 
 fn main() {
+    // fancy errors
+    color_eyre::install().unwrap();
+
     let args = Args::parse();
 
     let n_problems = 24;

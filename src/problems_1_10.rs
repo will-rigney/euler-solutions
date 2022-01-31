@@ -272,46 +272,31 @@ pub fn problem_9() -> i64 {
 
 /// sum of all primes under 2 million
 pub fn problem_10() -> u64 {
-    // very similar to solution to problem 7
-    // test if n can be divided by any of the entries in `primes`
-    fn is_prime(n: i32, primes: &[i32]) -> bool {
-        // get truncated square
-        // this is probably slow but can't see an integer only alternative
-        let sqrt = (n as f32).sqrt() as i32;
-        for i in primes {
-            // not a prime
-            if n % i == 0 {
-                return false;
-            }
-            // only test up to the square root
-            if i > &sqrt {
-                return true;
+    // seive of erasthones using array of bools for primacy
+    const MAX: i32 = 2_000_000;
+    const BOUND: usize = (MAX - 1) as usize;
+    let sqrt = (MAX as f32).sqrt() as usize + 1;
+
+    let mut seive = [true; BOUND];
+    seive[0] = false;
+    seive[1] = false;
+
+    // seives all the primes by index
+    for i in 2..=sqrt {
+        if seive[i] {
+            let mut j = i * 2;
+            while j < BOUND {
+                seive[j as usize] = false;
+                j += i;
             }
         }
-        true
     }
 
-    let max = 2_000_000;
-
-    // current number
-    let mut n = 3;
-
-    // keep a list of primes we've seen in our gigabytes of ram
-    // capacity hint is from previous run
-    let mut primes = Vec::with_capacity(148933);
-    // skip 2 for less divisions (todo: more optimisations)
-    primes.push(3);
-
-    while n < max {
-        // next odd number
-        n += 2;
-        // check if i n is prime by dividing it by all of our other primes
-        if is_prime(n, &primes) {
-            // add it to the list
-            primes.push(n);
-        }
-    }
-    // add the first prime
-    primes.push(2);
-    primes.iter().map(|i| *i as u64).sum()
+    // return the sum
+    seive
+        .iter()
+        .enumerate()
+        .filter(|(_, is_prime)| **is_prime)
+        .map(|(i, _)| i as u64)
+        .sum()
 }

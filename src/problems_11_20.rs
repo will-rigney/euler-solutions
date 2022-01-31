@@ -1,3 +1,5 @@
+use crate::utils::*;
+
 /// largest product in a hardcoded grid
 pub fn problem_11() -> i32 {
     let array = [
@@ -60,20 +62,15 @@ pub fn problem_11() -> i32 {
 
 /// first triangle number with over 500 divisors
 pub fn problem_12() -> i32 {
-    // count the number of divisors for the input number (naive version)
-    fn count_divisors(n: i32) -> i32 {
-        let mut count = 0;
-        for i in 1..((n as f32).sqrt() as i32) {
-            if n % i == 0 {
-                // don't count equal divisors twice
-                count += if n / i == i { 1 } else { 2 }
-            }
-        }
-        count
-    }
+    // list of primes for factorisation
+    let mut primes = vec![2, 3];
 
-    let mut triangle_number = 0;
-    for i in 1.. {
+    // count the number of divisors for the input number using prime factorisation
+    let mut count_divisors =
+        |n: i32| -> i32 { factorise(n, &mut primes).values().map(|e| e + 1).product() };
+
+    let mut triangle_number = 1;
+    for i in 2.. {
         triangle_number += i;
         if count_divisors(triangle_number) > 500 {
             break;
