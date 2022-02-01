@@ -248,7 +248,7 @@ pub fn problem_14() -> u64 {
         let mut n = i;
         let mut s = 0;
         // while sequence not complete and n greater than already computed value
-        while n!=1 && n >= i {
+        while n != 1 && n >= i {
             s += 1;
             n = collatz_step(n);
         }

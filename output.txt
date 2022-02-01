@@ -24,3 +24,4 @@ Euler Project Solutions
 23. sum of positive integers that can't be expressed as sum of two abundant numbers: *******, time: 42 ms
 24. millionth lexicograghic permutation of 0-9: **********, time: <1 ms
 25. index of first term in fibonacci sequence to contain 1000 digits: ****, time: <1 ms
+26. d < 1000 for which 1/d has longest recurring cycle: ***, time: <1 ms

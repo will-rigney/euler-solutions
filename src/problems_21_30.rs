@@ -83,6 +83,8 @@ pub fn problem_23() -> i32 {
 
     // reuse aliquot sum from problem 21
     // todo: move into utils w primes kept hidden in a struct
+    // bit of a spicy invariant in that reliance on state means
+    // arguments must be provided lexicographically to ensure primes found
     let mut s = |n: i32| {
         // hardcode s(1) to avoid divide by 0
         if n == 1 {
@@ -156,10 +158,45 @@ pub fn problem_24() -> String {
 
 /// index of first term in fibonacci sequence to contain 1000 digits
 pub fn problem_25() -> i32 {
-
     let num_digits = 1000.0;
     let phi = (1.0 + 5.0_f32.sqrt()) / 2.0;
 
     // take base10 log of both sides of Binet's formula & solve for n to find index
     ((5.0_f32.log10() / 2.0 + num_digits - 1.0) / phi.log10()).ceil() as i32
+}
+
+/// d < 1000 for which 1/d has longest recurring cycle
+pub fn problem_26() -> i32 {
+    fn reciprocal_recurrence_length(d: i32) -> i32 {
+        let mut result = 0;
+        let mut value = 1;
+        // repeating portion of remainder will be < d digits
+        // holds number of repeating digits calculated as yet for given dividend
+        let mut remainders = vec![0; d as usize];
+        // while we haven't already calculated remainder for given value (i.e. hasn't yet repeated)
+        while remainders[value as usize] == 0 {
+            // update number of divisors
+            remainders[value as usize] = result;
+            // move to next column
+            value *= 10;
+            value %= d;
+            result += 1;
+        }
+        // final result is number of iterations - initial remainder
+        result - remainders[value as usize]
+    }
+    let mut result = 0;
+    let mut max_length = 0;
+    for d in (2..1000).rev() {
+        // number of digits will never exceed d so we can short circuit
+        if max_length > d {
+            break;
+        }
+        let length = reciprocal_recurrence_length(d);
+        if length > max_length {
+            max_length = length;
+            result = d;
+        }
+    }
+    result
 }

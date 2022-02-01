@@ -37,7 +37,7 @@ fn main() {
 
     let args = Args::parse();
 
-    let n_problems = 25;
+    let n_problems = 26;
 
     // problems to solve
     let problems = match args.problem {
@@ -104,6 +104,7 @@ fn main() {
         23 => p.print_problem("23. sum of positive integers that can't be expressed as sum of two abundant numbers:", &problem_23),
         24 => p.print_problem("24. millionth lexicograghic permutation of 0-9:", &problem_24),
         25 => p.print_problem("25. index of first term in fibonacci sequence to contain 1000 digits:", &problem_25),
+        26 => p.print_problem("26. d < 1000 for which 1/d has longest recurring cycle:", &problem_26),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }

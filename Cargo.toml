@@ -2,7 +2,7 @@
 name = "euler-solutions"
 version = "0.0.0"
 authors = ["will <william@rigney.com.au>"]
-edition = "2018"
+edition = "2021"
 
 [profile.release]
 lto = "fat"
