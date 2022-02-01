@@ -1,4 +1,4 @@
-Euler Project Solutions
+Project Euler Solutions
 1. sum of multiples of 3 or 5 under 1000: ******, time: <1 ms
 2. sum of even values of fibonacci sequence under 4 million: *******, time: <1 ms
 3. largest prime factor of 600851475143: ****, time: 4 ms

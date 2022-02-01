@@ -42,7 +42,7 @@ fn main() {
     // problems to solve
     let problems = match args.problem {
         0 => {
-            Printer::print_heading("Euler Project Solutions");
+            Printer::print_heading("Project Euler Solutions");
             (1..=n_problems).collect()
         }
         _ => vec![args.problem],

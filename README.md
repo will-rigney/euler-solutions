@@ -1,4 +1,4 @@
-# Euler Project Solutions
+# Project Euler Solutions
 
 Solutions to problems available on [Project Euler](https://projecteuler.net),
 implemented in the one true meme language [Rust](https://rust-lang.org/).
