@@ -248,7 +248,6 @@ pub fn problem_27() -> i64 {
 /// sum of diagonals of 1001 x 1001 number spiral
 pub fn problem_28() -> i32 {
     const MAX_LENGTH: i32 = 1001;
-    // soo. the way it works is to add 2 to each dimension
     // length of the side of the square
     let mut sum = 1;
     let mut length = 1;
@@ -282,4 +281,27 @@ pub fn problem_29() -> i32 {
     terms.sort_by(|a, b| a.partial_cmp(b).unwrap());
     terms.dedup();
     terms.len() as i32
+}
+
+/// sum of numbers that can be written as sum of 5th powers of their digits
+pub fn problem_30() -> i32 {
+    // need to find an upper bound
+    // 9^5 = 59049, n >= 5
+    // 7 * 9^5 = 413343 (not possible with 7 digits), n <= 6
+    let mut numbers = Vec::<i32>::new();
+
+    // iterate over every number to upper bound
+    for number in 2..1000000 {
+        let mut n: i32 = number;
+        let mut sum = 0;
+        while n != 0 {
+            let digit = n % 10;
+            sum += digit.pow(5);
+            n /= 10;
+        }
+        if sum == number {
+            numbers.push(number);
+        }
+    }
+    numbers.iter().sum()
 }
