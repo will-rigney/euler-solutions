@@ -244,3 +244,26 @@ pub fn problem_27() -> i64 {
     }
     product
 }
+
+/// sum of diagonals of 1001 x 1001 number spiral
+pub fn problem_28() -> i32 {
+    const MAX_LENGTH: i32 = 1001;
+    // soo. the way it works is to add 2 to each dimension
+    // length of the side of the square
+    let mut sum = 1;
+    let mut length = 1;
+    // last diagonal we visited on previous iteration
+    let mut last_diagonal = 1;
+    // start with second iteration
+    while length < MAX_LENGTH {
+        // we are summing numbers on the diagonals
+        for _ in 0..4 {
+            last_diagonal += length + 1;
+            sum += last_diagonal;
+        }
+
+        // length should go up by 2 each time (2 new corners)
+        length += 2;
+    }
+    sum
+}

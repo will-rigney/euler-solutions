@@ -37,7 +37,7 @@ fn main() {
 
     let args = Args::parse();
 
-    let n_problems = 27;
+    let n_problems = 28;
 
     // problems to solve
     let problems = match args.problem {
@@ -106,6 +106,7 @@ fn main() {
         25 => p.print_problem("25. index of first term in fibonacci sequence to contain 1000 digits:", &problem_25),
         26 => p.print_problem("26. d < 1000 for which 1/d has longest recurring cycle:", &problem_26),
         27 => p.print_problem("27. product of coefficients for quadratics of form n^2 + an + b producing most primes:", &problem_27),
+        28 => p.print_problem("28. sum of diagonals of 1001 x 1001 number spiral:", &problem_28),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }
