@@ -200,3 +200,47 @@ pub fn problem_26() -> i32 {
     }
     result
 }
+
+/// product of coefficients for quadratics of form n^2 + an + b producing most primes
+pub fn problem_27() -> i64 {
+    // prime seive from problem 10 to get all primes up to 16273
+    // from brute force largest prime we see is 16273
+    const MAX_PRIME: usize = 16274;
+    const BOUND: usize = MAX_PRIME - 1;
+    let sqrt = (MAX_PRIME as f32).sqrt() as usize + 1;
+
+    let mut seive = [true; MAX_PRIME];
+    seive[0] = false;
+    seive[1] = false;
+
+    // seive all the primes
+    for i in 2..=sqrt {
+        if seive[i] {
+            let mut j = i * 2;
+            while j < BOUND {
+                seive[j as usize] = false;
+                j += i;
+            }
+        }
+    }
+
+    let mut max_count = 0;
+    let mut product = 0;
+    for a in -999..1000 {
+        for b in -1000..=1000 {
+            let mut n: i64 = 0;
+            loop {
+                let result = (n.pow(2) + a * n + b).abs();
+                if result > MAX_PRIME as i64 || !seive[result as usize] {
+                    break;
+                }
+                n += 1;
+            }
+            if n > max_count {
+                max_count = n;
+                product = a * b;
+            }
+        }
+    }
+    product
+}

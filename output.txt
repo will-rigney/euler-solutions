@@ -25,3 +25,4 @@ Project Euler Solutions
 24. millionth lexicograghic permutation of 0-9: **********, time: <1 ms
 25. index of first term in fibonacci sequence to contain 1000 digits: ****, time: <1 ms
 26. d < 1000 for which 1/d has longest recurring cycle: ***, time: <1 ms
+27. product of coefficients for quadratics of form n^2 + an + b producing most primes: ******, time: 20 ms
