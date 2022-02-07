@@ -1,7 +1,6 @@
 use colored::*;
 
-use std::fmt::Display;
-use std::time::Instant;
+use std::{fmt::Display, time::Instant};
 
 /// Provides printing functions configurable on initialisation
 pub struct Printer {
