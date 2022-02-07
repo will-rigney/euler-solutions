@@ -124,3 +124,7 @@ fn test_problem_30() {
 fn test_problem_31() {
     insta::assert_debug_snapshot!(problem_31());
 }
+#[test]
+fn test_problem_32() {
+    insta::assert_debug_snapshot!(problem_32());
+}
