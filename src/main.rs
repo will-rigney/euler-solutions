@@ -41,7 +41,7 @@ fn main() {
 
     let args = Args::parse();
 
-    let n_problems = 32;
+    let n_problems = 33;
 
     // problems to solve
     let problems = match args.problem {
@@ -115,6 +115,7 @@ fn main() {
         30 => p.print_problem("30. sum of numbers that can be written as sum of 5th powers of their digits:", &problem_30),
         31 => p.print_problem("31. number of ways of making £2 in UK currency:", &problem_31),
         32 => p.print_problem("32. sum of products whose multiplicand/multiplier/product can be written as 1 through 9 pandigital:", &problem_32),
+        33 => p.print_problem("33. find denominator in lowest terms of product of curious fractions:", &problem_33),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }

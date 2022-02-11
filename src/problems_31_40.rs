@@ -92,3 +92,33 @@ pub fn problem_32() -> u64 {
     }
     products.iter().sum()
 }
+
+/// find denominator in lowest terms of product of curious fractions
+pub fn problem_33() -> i32 {
+    let mut result_n = 1;
+    let mut result_d = 1;
+
+    // d >= 2 so fraction < 1
+    for d in 2..=9 {
+        for n in 1..d {
+            let fraction = n as f32 / d as f32;
+            // try and find curious fractions
+            // c up to d will be on left side of numerator
+            for c in 1..d {
+                if (10 * c + n) as f32 / (10 * d + c) as f32 == fraction {
+                    result_n *= n;
+                    result_d *= d;
+                }
+            }
+            // c >= d will be right side of numerator
+            for c in d..=9 {
+                if (10 * n + c) as f32 / (10 * c + d) as f32 == fraction {
+                    result_n *= n;
+                    result_d *= d;
+                }
+            }
+        }
+    }
+    // return simplified denominator of the result
+    result_d / result_n
+}
