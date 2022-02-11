@@ -122,3 +122,35 @@ pub fn problem_33() -> i32 {
     // return simplified denominator of the result
     result_d / result_n
 }
+
+/// sum of numbers equal to sum of factorials of their digits
+pub fn problem_34() -> u64 {
+    // we cheat and know a reasonable tight bound from previous run
+    const MAX: usize = 50_000;
+
+    // factorials of digits 0-9
+    let mut factorials = [0; 10];
+    factorials[0] = 1;
+    factorials[1] = 1;
+    factorials[2] = 2;
+
+    for i in 3..=9 {
+        factorials[i as usize] = i * factorials[(i - 1) as usize];
+    }
+    (3..(MAX as u64))
+        .into_iter()
+        .filter(|n| {
+            // find sum of factorials of digits
+            let mut sum = 0;
+            let mut m = *n;
+            while m > 0 {
+                let d = m % 10;
+                // add digit factorial to sum
+                sum += factorials[d as usize];
+                // move to next digit
+                m /= 10;
+            }
+            sum == *n
+        })
+        .sum()
+}
