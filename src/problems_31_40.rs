@@ -216,3 +216,27 @@ pub fn problem_35() -> i32 {
     }
     n
 }
+
+/// sum of numbers less than 1000000 that are palindromes in base 10 & base 2
+pub fn problem_36() -> i32 {
+    const MAX: i32 = 1_000_000;
+    /// checks if a string is a palindrome, e.g. same as its reversed form
+    fn is_palindrome(s: &str) -> bool {
+        s == s.chars().rev().collect::<String>()
+    }
+
+    // palindromes in base 2 must not have leading zeros, so must be odd numbers
+    let mut n = 1;
+    let mut sum = 0;
+    while n < MAX {
+        let decimal = n.to_string();
+        // check if it's a palindrome
+        let binary = format!("{:b}", n);
+        // check if it's a palindrome
+        if is_palindrome(&decimal) && is_palindrome(&binary) {
+            sum += n;
+        }
+        n += 2;
+    }
+    sum
+}
