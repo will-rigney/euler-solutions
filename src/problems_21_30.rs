@@ -218,7 +218,7 @@ pub fn problem_27() -> i64 {
         if seive[i] {
             let mut j = i * 2;
             while j < BOUND {
-                seive[j as usize] = false;
+                seive[j] = false;
                 j += i;
             }
         }

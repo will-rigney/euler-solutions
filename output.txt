@@ -21,7 +21,7 @@ Project Euler Solutions
 20. sum of digits in the number 100!: ***, time: <1 ms
 21. sum of amicable numbers under 10 000: *****, time: 4 ms
 22. total of name scores for names in 'p022_names.txt': *********, time: <1 ms
-23. sum of positive integers that can't be expressed as sum of two abundant numbers: *******, time: 42 ms
+23. sum of positive integers that can't be expressed as sum of two abundant numbers: *******, time: 41 ms
 24. millionth lexicograghic permutation of 0-9: **********, time: <1 ms
 25. index of first term in fibonacci sequence to contain 1000 digits: ****, time: <1 ms
 26. d < 1000 for which 1/d has longest recurring cycle: ***, time: <1 ms
@@ -33,3 +33,4 @@ Project Euler Solutions
 32. sum of products whose multiplicand/multiplier/product can be written as 1 through 9 pandigital: *****, time: <1 ms
 33. find denominator in lowest terms of product of curious fractions: ***, time: <1 ms
 34. sum of numbers equal to sum of factorials of their digits: *****, time: <1 ms
+35. number of circular primes under one million: **, time: 7 ms

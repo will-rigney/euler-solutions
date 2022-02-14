@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{BTreeSet, HashSet};
 
 /// number of ways of making £2 in UK currency
 pub fn problem_31() -> i32 {
@@ -153,4 +153,66 @@ pub fn problem_34() -> u64 {
             sum == *n
         })
         .sum()
+}
+
+/// number of circular primes under one million
+pub fn problem_35() -> i32 {
+    // use prime seive to find all primes up to max
+    const MAX: usize = 1_000_000;
+    let mut seive = [true; MAX + 1];
+    let sqrt = (MAX as f32).sqrt() as usize + 1;
+    seive[0] = false;
+    seive[1] = false;
+    for i in 2..=sqrt {
+        if seive[i] {
+            let mut j = i * 2;
+            while j < MAX {
+                seive[j] = false;
+                j += i;
+            }
+        }
+    }
+
+    // number of circular primes
+    let mut n = 0;
+
+    let mut primes: BTreeSet<i32> = seive
+        .iter()
+        .enumerate()
+        .filter_map(|(i, p)| if *p { Some(i as i32) } else { None })
+        .collect();
+
+    'outer: while let Some(p) = primes.pop_first() {
+        let mut c = 1;
+        let len = (p as f32).log10() as i32 + 1;
+        let mut p2 = p;
+
+        for _ in 1..len {
+            // last digit
+            let d = p2 % 10;
+            // move everything one digit right
+            p2 /= 10;
+            // add digit back on the left side
+            p2 += d * 10_i32.pow(len as u32 - 1);
+
+            // if the permutation is equal to the original prime then it's circular
+            if p2 == p {
+                n += 1;
+                continue 'outer;
+            }
+
+            if primes.remove(&p2) {
+                // this is circular, increment temporary count
+                c += 1;
+            } else {
+                // these are not circular primes
+                continue 'outer;
+            }
+        }
+        // if all permutations are prime
+        if c == len {
+            n += c;
+        }
+    }
+    n
 }

@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install nightly
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: nightly
+          override: true
     - uses: actions/checkout@v2
     - name: Run
       run: cargo run --release -- -ct > run.txt

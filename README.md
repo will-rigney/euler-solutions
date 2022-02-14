@@ -33,3 +33,8 @@ into the repo at [output.txt](output.txt).
 I have the program running with a GitHub action, at some point would love to
 automatically update the published (censored) output. I'm a little scared of
 infinity automatic commits though, so maybe l8r.
+
+## Notes
+
+Problem 35 uses the unstable `#![feature(map_first_last)]` flag and so requires
+nightly to compile.
