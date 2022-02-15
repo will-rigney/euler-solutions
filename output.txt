@@ -34,4 +34,5 @@ Project Euler Solutions
 33. find denominator in lowest terms of product of curious fractions: ***, time: <1 ms
 34. sum of numbers equal to sum of factorials of their digits: *****, time: <1 ms
 35. number of circular primes under one million: **, time: 7 ms
-36. sum of numbers less than 1000000 that are palindromes in base 10 & base 2: ******, time: 48 ms
+36. sum of numbers less than 1000000 that are palindromes in base 10 & base 2: ******, time: 42 ms
+37. sum of primes that are truncatable in both directions: ******, time: 3739 ms

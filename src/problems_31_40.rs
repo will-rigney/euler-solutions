@@ -240,3 +240,44 @@ pub fn problem_36() -> i32 {
     }
     sum
 }
+
+/// sum of primes that are truncatable in both directions
+pub fn problem_37() -> i32 {
+    // max prime is 739397
+    // problem states there are 11 such numbers
+    const N_PRIMES: i32 = 11;
+    // number of truncatable primes found so far
+    let mut primes_found = 0;
+    let mut sum = 0;
+    let mut primes = vec![2, 3, 5, 7];
+    let mut n = 11;
+
+    while primes_found < N_PRIMES {
+        if !primes.iter().any(|p| n % p == 0) {
+            // this number is prime
+            // add to the vector
+            primes.push(n);
+            // check if truncated versions are also prime
+            let len = (n as f32).log10() as i32 + 1;
+            let mut is_truncatable = true;
+            for i in 1..len {
+                // left side
+                let l = n % 10_i32.pow((len - i) as u32);
+                // right side
+                let r = n / 10_i32.pow(i as u32);
+                if !primes.contains(&l) || !primes.contains(&r) {
+                    is_truncatable = false;
+                    break;
+                }
+            }
+
+            if is_truncatable {
+                sum += n;
+                primes_found += 1;
+            }
+        }
+
+        n += 2;
+    }
+    sum
+}

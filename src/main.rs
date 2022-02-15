@@ -42,7 +42,7 @@ fn main() {
 
     let args = Args::parse();
 
-    let n_problems = 36;
+    let n_problems = 37;
 
     // problems to solve
     let problems = match args.problem {
@@ -120,6 +120,7 @@ fn main() {
         34 => p.print_problem("34. sum of numbers equal to sum of factorials of their digits:", &problem_34),
         35 => p.print_problem("35. number of circular primes under one million:", &problem_35),
         36 => p.print_problem("36. sum of numbers less than 1000000 that are palindromes in base 10 & base 2:", &problem_36),
+        37 => p.print_problem("37. sum of primes that are truncatable in both directions:", &problem_37),
         _ => Printer::print_missing(format!("no solution for problem {}", problem))
         }
     }
