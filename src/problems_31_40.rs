@@ -244,28 +244,43 @@ pub fn problem_36() -> i32 {
 /// sum of primes that are truncatable in both directions
 pub fn problem_37() -> i32 {
     // max prime is 739397
+    const MAX: usize = 739398;
+
+    // use prime seive to find all primes up to max
+    let mut seive = [true; MAX + 1];
+    let sqrt = (MAX as f32).sqrt() as usize + 1;
+    seive[0] = false;
+    seive[1] = false;
+    for i in 2..=sqrt {
+        if seive[i] {
+            let mut j = i * 2;
+            while j < MAX {
+                seive[j] = false;
+                j += i;
+            }
+        }
+    }
+
     // problem states there are 11 such numbers
     const N_PRIMES: i32 = 11;
     // number of truncatable primes found so far
     let mut primes_found = 0;
     let mut sum = 0;
-    let mut primes = vec![2, 3, 5, 7];
     let mut n = 11;
 
     while primes_found < N_PRIMES {
-        if !primes.iter().any(|p| n % p == 0) {
+        if seive[n] {
             // this number is prime
-            // add to the vector
-            primes.push(n);
-            // check if truncated versions are also prime
             let len = (n as f32).log10() as i32 + 1;
             let mut is_truncatable = true;
+            // check if truncated versions are also prime
             for i in 1..len {
+                // n.b. 10.pow function could be const for known values of len
                 // left side
-                let l = n % 10_i32.pow((len - i) as u32);
+                let l = n % 10_usize.pow((len - i) as u32);
                 // right side
-                let r = n / 10_i32.pow(i as u32);
-                if !primes.contains(&l) || !primes.contains(&r) {
+                let r = n / 10_usize.pow(i as u32);
+                if !seive[l] || !seive[r] {
                     is_truncatable = false;
                     break;
                 }
@@ -276,8 +291,7 @@ pub fn problem_37() -> i32 {
                 primes_found += 1;
             }
         }
-
         n += 2;
     }
-    sum
+    sum as i32
 }
