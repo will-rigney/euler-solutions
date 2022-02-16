@@ -8,6 +8,11 @@ pub struct Printer {
     should_censor: bool,
 }
 
+#[derive(Default)]
+pub struct Summary {
+    times: Vec<u64>
+}
+
 impl Printer {
     /// Creates a new Printer instance with settings
     pub fn new(should_show_time: bool, should_censor: bool) -> Self {
@@ -29,7 +34,7 @@ impl Printer {
     /// '*' characters when printing.
     /// q is the question string
     /// f is the function to run to provide the problem solution
-    pub fn print_problem<T: Display>(&self, q: &str, f: &dyn Fn() -> T) {
+    pub fn print_problem<T: Display>(&self, q: &str, f: &dyn Fn() -> T, summary: &mut Summary) {
         // time & run the problem function
         let start = Instant::now();
         let result = f();
@@ -43,6 +48,9 @@ impl Printer {
         }
         // print the question & answer
         print!("{} {}", q, result.purple().bold());
+
+        // "log" the execution time in summary
+        summary.times.push(time as u64);
 
         // print the execution time
         if self.should_show_time {
@@ -62,5 +70,16 @@ impl Printer {
     /// Meant to be used to notify that a solution for a given problem is not present
     pub fn print_missing<T: Display>(s: T) {
         println!("{}", format!("{}", s).red().bold());
+    }
+
+    pub fn print_summary(summary: &Summary) {
+        let total = summary.times.len();
+        let t1ms = summary.times.iter().filter(|t| **t < 1).count();
+        let t10ms = summary.times.iter().filter(|t| **t < 10).count();
+        let t100ms = summary.times.iter().filter(|t| **t < 100).count();
+        println!("{}", "Summary".blue());
+        println!("<1ms: {}/{} ({}%)", t1ms, total, t1ms * 100 / total);
+        println!("<10ms: {}/{} ({}%)", t10ms, total, t10ms * 100 / total);
+        println!("<100ms: {}/{} ({}%)", t100ms, total, t100ms * 100 / total);
     }
 }

@@ -22,10 +22,12 @@ flags:
 - `-c` will censor the results, to show the execution time without giving
   anything away.
 - `-p <number>` will execute & print output for only problem \<number\>.
+- `-s` will include a summary of execution times showing problems executing in
+  <1ms, <10ms and <100ms bands.
 
 ## Results
 
-Output from running a release build of the program using `-ct` is checked
+Output from running a release build of the program using `-cts` is checked
 into the repo at [output.txt](output.txt).
 
 ## CI
