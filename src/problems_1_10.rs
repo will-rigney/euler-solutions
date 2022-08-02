@@ -277,7 +277,7 @@ pub fn problem_10() -> u64 {
     const BOUND: usize = (MAX - 1) as usize;
     let sqrt = (MAX as f32).sqrt() as usize + 1;
 
-    let mut seive = [true; BOUND];
+    let mut seive = vec![true; BOUND].into_boxed_slice();
     seive[0] = false;
     seive[1] = false;
 
