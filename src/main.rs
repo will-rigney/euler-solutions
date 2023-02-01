@@ -1,4 +1,3 @@
-#![feature(map_first_last)]
 use clap::Parser;
 
 mod print;

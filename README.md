@@ -38,5 +38,4 @@ infinity automatic commits though, so maybe l8r.
 
 ## Notes
 
-Problem 35 uses the unstable `#![feature(map_first_last)]` flag and so requires
-nightly to compile.
+Currently compiles on stable (1.67.0).
