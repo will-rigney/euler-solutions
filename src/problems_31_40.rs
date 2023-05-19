@@ -1,7 +1,8 @@
+use crate::Int;
 use std::collections::{BTreeSet, HashSet};
 
 /// number of ways of making £2 in UK currency
-pub fn problem_31() -> i32 {
+pub fn problem_31() -> Int {
     const TARGET: usize = 200;
     // set of coins
     const COINS: [usize; 8] = [1, 2, 5, 10, 20, 50, 100, 200];
@@ -21,11 +22,12 @@ pub fn problem_31() -> i32 {
             solution[n] += solution[n - coin];
         }
     }
-    *solution.last().unwrap()
+    let result = *solution.last().unwrap();
+    result as Int
 }
 
 /// sum of products whose multiplicand/multiplier/product can be written as 1 through 9 pandigital
-pub fn problem_32() -> u64 {
+pub fn problem_32() -> Int {
     /// check if a given integer input is pandigital
     /// n.b. only actually works on unsigned input
     fn is_pandigital(n: u64) -> bool {
@@ -90,11 +92,12 @@ pub fn problem_32() -> u64 {
             }
         }
     }
-    products.iter().sum()
+    let result: u64 = products.iter().sum();
+    result as Int
 }
 
 /// find denominator in lowest terms of product of curious fractions
-pub fn problem_33() -> i32 {
+pub fn problem_33() -> Int {
     let mut result_n = 1;
     let mut result_d = 1;
 
@@ -120,11 +123,12 @@ pub fn problem_33() -> i32 {
         }
     }
     // return simplified denominator of the result
-    result_d / result_n
+    let result = result_d / result_n;
+    result as Int
 }
 
 /// sum of numbers equal to sum of factorials of their digits
-pub fn problem_34() -> u64 {
+pub fn problem_34() -> Int {
     // we cheat and know a reasonable tight bound from previous run
     const MAX: usize = 50_000;
 
@@ -137,7 +141,7 @@ pub fn problem_34() -> u64 {
     for i in 3..=9 {
         factorials[i as usize] = i * factorials[(i - 1) as usize];
     }
-    (3..(MAX as u64))
+    let result: u64 = (3..(MAX as u64))
         .into_iter()
         .filter(|n| {
             // find sum of factorials of digits
@@ -152,11 +156,12 @@ pub fn problem_34() -> u64 {
             }
             sum == *n
         })
-        .sum()
+        .sum();
+    result as Int
 }
 
 /// number of circular primes under one million
-pub fn problem_35() -> i32 {
+pub fn problem_35() -> Int {
     // use prime seive to find all primes up to max
     const MAX: usize = 1_000_000;
     let mut seive = [true; MAX + 1];
@@ -214,11 +219,11 @@ pub fn problem_35() -> i32 {
             n += c;
         }
     }
-    n
+    n as Int
 }
 
 /// sum of numbers less than 1000000 that are palindromes in base 10 & base 2
-pub fn problem_36() -> i32 {
+pub fn problem_36() -> Int {
     const MAX: i32 = 1_000_000;
     /// checks if a string is a palindrome, e.g. same as its reversed form
     fn is_palindrome(s: &str) -> bool {
@@ -238,11 +243,11 @@ pub fn problem_36() -> i32 {
         }
         n += 2;
     }
-    sum
+    sum as Int
 }
 
 /// sum of primes that are truncatable in both directions
-pub fn problem_37() -> i32 {
+pub fn problem_37() -> Int {
     // max prime is 739397
     const MAX: usize = 739398;
 
@@ -293,5 +298,5 @@ pub fn problem_37() -> i32 {
         }
         n += 2;
     }
-    sum as i32
+    sum as Int
 }

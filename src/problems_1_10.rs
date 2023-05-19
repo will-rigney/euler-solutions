@@ -1,5 +1,7 @@
+use crate::Int;
+
 /// sum of multiples of 3 or 5 under 1000
-pub fn problem_1() -> u64 {
+pub fn problem_1() -> Int {
     let mut sum = 0;
     // dumb brute force way
     for i in 0..1000 {
@@ -7,11 +9,11 @@ pub fn problem_1() -> u64 {
             sum += i;
         }
     }
-    sum
+    sum as Int
 }
 
 /// sum of even values of fibonacci sequence under 4 million
-pub fn problem_2() -> u64 {
+pub fn problem_2() -> Int {
     // sum of even values of fibonacci sequence under 4 million:
     let mut sum = 0;
     let mut a = 1;
@@ -27,7 +29,7 @@ pub fn problem_2() -> u64 {
             sum += result;
         }
     }
-    sum
+    sum as Int
 }
 
 /// largest prime factor of 600851475143
@@ -112,7 +114,7 @@ pub fn problem_4() -> i64 {
 }
 
 /// smallest positive number divisible by all numbers from 1 to 20
-pub fn problem_5() -> i64 {
+pub fn problem_5() -> Int {
     /// test if a number n is divisible by all numbers 11 - 20
     fn test_divisible(n: i64) -> bool {
         !(11..=20).any(|i| n % i != 0)
@@ -123,11 +125,11 @@ pub fn problem_5() -> i64 {
     while !test_divisible(result) {
         result += 2520;
     }
-    result
+    result as Int
 }
 
 /// difference between sum of squares and square of sum of numbers from 1 to 100
-pub fn problem_6() -> i64 {
+pub fn problem_6() -> Int {
     let max = 100;
 
     // get the sum of the squares
@@ -142,7 +144,7 @@ pub fn problem_6() -> i64 {
         .expect("couldn't square sums")
         .pow(2);
 
-    (square_sum - sum_squares).abs()
+    (square_sum - sum_squares).abs() as Int
 }
 
 /// 10001st prime
@@ -271,7 +273,7 @@ pub fn problem_9() -> i64 {
 }
 
 /// sum of all primes under 2 million
-pub fn problem_10() -> u64 {
+pub fn problem_10() -> Int {
     // seive of erasthones using array of bools for primacy
     const MAX: i32 = 2_000_000;
     const BOUND: usize = (MAX - 1) as usize;
@@ -293,10 +295,12 @@ pub fn problem_10() -> u64 {
     }
 
     // return the sum
-    seive
+    let result: u64 = seive
         .iter()
         .enumerate()
         .filter(|(_, is_prime)| **is_prime)
         .map(|(i, _)| i as u64)
-        .sum()
+        .sum();
+
+    result as Int
 }

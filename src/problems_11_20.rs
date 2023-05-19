@@ -1,7 +1,8 @@
 use crate::utils::*;
+use crate::Int;
 
 /// largest product in a hardcoded grid
-pub fn problem_11() -> i32 {
+pub fn problem_11() -> Int {
     let array = [
         [08, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 08],
         [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00],
@@ -57,11 +58,11 @@ pub fn problem_11() -> i32 {
             }
         }
     }
-    greatest_product
+    greatest_product as Int
 }
 
 /// first triangle number with over 500 divisors
-pub fn problem_12() -> i32 {
+pub fn problem_12() -> Int {
     // list of primes for factorisation
     let mut primes = vec![2, 3];
 
@@ -76,11 +77,11 @@ pub fn problem_12() -> i32 {
             break;
         }
     }
-    triangle_number
+    triangle_number as Int
 }
 
 /// first 10 digits of sum of 100 50 digit numbers
-pub fn problem_13() -> String {
+pub fn problem_13() -> Int {
     let array = [
         "37107287533902102798797998220837590246510135740250",
         "46376937677490009712648124896970078050417018260538",
@@ -213,17 +214,20 @@ pub fn problem_13() -> String {
     }
 
     // convert first 10 digits to string
-    result
+    let result = result
         .iter()
         .rev()
         .take(10)
         .map(|i| i.to_string())
         .reduce(|s, c| s + &c)
-        .unwrap()
+        .unwrap();
+
+    // convert to int
+    result.parse().unwrap()
 }
 
 /// starting number of longest collatz sequence under one million
-pub fn problem_14() -> u64 {
+pub fn problem_14() -> Int {
     /// returns next term in collatz sequence given current term `n`
     fn collatz_step(n: u64) -> u64 {
         if n & 0b1 == 1 {
@@ -262,7 +266,7 @@ pub fn problem_14() -> u64 {
             result = i;
         }
     }
-    result
+    result as Int
 }
 
 /// lattice paths in 20x20 grid
@@ -289,7 +293,7 @@ pub fn problem_15() -> i64 {
 }
 
 /// sum of digits in 2^1000
-pub fn problem_16() -> u64 {
+pub fn problem_16() -> Int {
     // previous runs say 302 is enough
     let mut digits = [0; 302];
 
@@ -325,7 +329,7 @@ pub fn problem_16() -> u64 {
 }
 
 /// number of characters in 1-1000 (inclusive) written as words
-pub fn problem_17() -> u64 {
+pub fn problem_17() -> Int {
     // numbers 1-9
     let numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
@@ -391,11 +395,11 @@ pub fn problem_17() -> u64 {
     // 1000
     count += "onethousand".len() as u64;
 
-    count
+    count as Int
 }
 
 /// maximum top to bottom path in 15 row triangle
-pub fn problem_18() -> u64 {
+pub fn problem_18() -> Int {
     let mut triangle = [
         vec![75],
         vec![95, 64],
@@ -425,11 +429,11 @@ pub fn problem_18() -> u64 {
         }
     }
     // top of the triangle is the answer
-    triangle[0][0]
+    triangle[0][0] as Int
 }
 
 /// number of sundays in 20th century
-pub fn problem_19() -> u64 {
+pub fn problem_19() -> Int {
     // days, expressed as ints
     #[derive(PartialEq, Eq, Debug)]
     enum Day {
@@ -527,11 +531,11 @@ pub fn problem_19() -> u64 {
             first_of_month = Day::from((day_index + n_days) % 7);
         }
     }
-    count
+    count as Int
 }
 
 /// sum of digits in the number 100!
-pub fn problem_20() -> u64 {
+pub fn problem_20() -> Int {
     // same as problem 16 - use long multiplication
     // 158 digits is enough
     let mut digits = [0; 158];

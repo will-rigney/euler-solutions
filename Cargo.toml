@@ -15,8 +15,11 @@ insta = "1.12.0"
 
 [dependencies]
 # fancy errors
-color-eyre = "0.6.0"
+color-eyre = "0.6.2"
 # terminal colours
 colored = "2.0.0"
 # argument parsing
 clap = { version = "3.0.14", features = ["derive"] }
+#
+# lazy_static = "1.4.0"
+once_cell = "1.17.1"

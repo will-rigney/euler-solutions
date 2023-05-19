@@ -1,6 +1,7 @@
 use colored::*;
 
 use std::{fmt::Display, time::Instant};
+use crate::Int;
 
 /// Provides printing functions configurable on initialisation
 pub struct Printer {
@@ -34,7 +35,7 @@ impl Printer {
     /// '*' characters when printing.
     /// q is the question string
     /// f is the function to run to provide the problem solution
-    pub fn print_problem<T: Display>(&self, q: &str, f: &dyn Fn() -> T, summary: &mut Summary) {
+    pub fn print_problem(&self, q: &str, f: fn() -> Int, summary: &mut Summary) {
         // time & run the problem function
         let start = Instant::now();
         let result = f();
