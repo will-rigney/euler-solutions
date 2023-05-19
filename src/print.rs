@@ -3,6 +3,8 @@ use colored::*;
 use std::{fmt::Display, time::Instant};
 use crate::Int;
 
+// todo: revisit at some point all of these uncharacteristically short variable names
+
 /// Provides printing functions configurable on initialisation
 pub struct Printer {
     should_show_time: bool,
@@ -33,9 +35,10 @@ impl Printer {
     /// time in milliseconds.
     /// If the Printer has been initialised with should_censor, will replace the actual result with
     /// '*' characters when printing.
+    /// n is the problem number
     /// q is the question string
     /// f is the function to run to provide the problem solution
-    pub fn print_problem(&self, q: &str, f: fn() -> Int, summary: &mut Summary) {
+    pub fn print_problem(&self, n: usize, q: &str, f: fn() -> Int, summary: &mut Summary) {
         // time & run the problem function
         let start = Instant::now();
         let result = f();
@@ -47,8 +50,8 @@ impl Printer {
         if self.should_censor {
             result = "*".repeat(result.len());
         }
-        // print the question & answer
-        print!("{} {}", q, result.purple().bold());
+        // print the number, question & answer
+        print!("{}. {} {}", n, q, result.purple().bold());
 
         // "log" the execution time in summary
         summary.times.push(time as u64);
