@@ -102,8 +102,6 @@ fn main() {
     // print heading
     Printer::print_heading("Project Euler Solutions");
 
-    // todo: re-add the print missing thing when a problem was not in the set
-
     match args.problem {
         0 => {
             // just do all of them
@@ -112,9 +110,15 @@ fn main() {
             }
         }
         _ => {
-            let index = args.problem - 1;
-            let problem =  PROBLEMS.iter().find(|p| p.0 == args.problem).expect("no es problemo");
-            printer.print_problem(problem.0, problem.1, problem.2, &mut summary)
+            let problem =  PROBLEMS.iter().find(|p| p.0 == args.problem);
+            match problem {
+                Some(problem) => {
+                    printer.print_problem(problem.0, problem.1, problem.2, &mut summary)
+                },
+                None => {
+                    Printer::print_missing(format!("no solution for problem {}", args.problem))
+                }
+            };
         },
     };
 
