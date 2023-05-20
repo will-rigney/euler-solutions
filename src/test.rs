@@ -1,5 +1,7 @@
 use crate::*;
-// todo: probably can make a macro in build.rs that would generate all these tests
+
+// snapshot tests
+// todo: probably can make something in build.rs that would generate all these tests
 #[test]
 fn test_problem_1() {
     insta::assert_debug_snapshot!(problem_1());

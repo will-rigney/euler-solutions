@@ -82,7 +82,7 @@ pub fn problem_32() -> Int {
         // n is 1 digit needs 4 digit multiplier to make 4 digit result
         // n is 2 digits needs 3 digit multiplier to make 4 digit result
         let low_mult = if n < 10 { 1234 } else { 123 };
-        // product must be 4 digits, max multipier can't exceed 10000 / n + 1
+        // product must be 4 digits, max multiplier can't exceed 10000 / n + 1
         let high_mult = 10000 / n + 1;
         for m in low_mult..high_mult {
             let product = n * m;
@@ -139,9 +139,9 @@ pub fn problem_34() -> Int {
     factorials[2] = 2;
 
     for i in 3..=9 {
-        factorials[i as usize] = i * factorials[(i - 1) as usize];
+        factorials[i] = i * factorials[i - 1];
     }
-    let result: u64 = (3..(MAX as u64))
+    let result: usize = (3..MAX)
         .into_iter()
         .filter(|n| {
             // find sum of factorials of digits
@@ -150,7 +150,7 @@ pub fn problem_34() -> Int {
             while m > 0 {
                 let d = m % 10;
                 // add digit factorial to sum
-                sum += factorials[d as usize];
+                sum += factorials[d];
                 // move to next digit
                 m /= 10;
             }
