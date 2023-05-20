@@ -274,25 +274,11 @@ pub fn problem_9() -> i64 {
 
 /// sum of all primes under 2 million
 pub fn problem_10() -> Int {
-    // seive of erasthones using array of bools for primacy
     const MAX: i32 = 2_000_000;
     const BOUND: usize = (MAX - 1) as usize;
-    let sqrt = (MAX as f32).sqrt() as usize + 1;
 
-    let mut seive = vec![true; BOUND].into_boxed_slice();
-    seive[0] = false;
-    seive[1] = false;
-
-    // seives all the primes by index
-    for i in 2..=sqrt {
-        if seive[i] {
-            let mut j = i * 2;
-            while j < BOUND {
-                seive[j as usize] = false;
-                j += i;
-            }
-        }
-    }
+    let mut seive = vec![true; BOUND];
+    crate::utils::seive(&mut seive, MAX as usize);
 
     // return the sum
     let result: u64 = seive

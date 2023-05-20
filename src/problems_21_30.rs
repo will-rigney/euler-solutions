@@ -207,23 +207,9 @@ pub fn problem_27() -> i64 {
     // prime seive from problem 10 to get all primes up to 16273
     // from brute force largest prime we see is 16273
     const MAX_PRIME: usize = 16274;
-    const BOUND: usize = MAX_PRIME - 1;
-    let sqrt = (MAX_PRIME as f32).sqrt() as usize + 1;
 
     let mut seive = [true; MAX_PRIME];
-    seive[0] = false;
-    seive[1] = false;
-
-    // seive all the primes
-    for i in 2..=sqrt {
-        if seive[i] {
-            let mut j = i * 2;
-            while j < BOUND {
-                seive[j] = false;
-                j += i;
-            }
-        }
-    }
+    crate::utils::seive(&mut seive, MAX_PRIME);
 
     let mut max_count = 0;
     let mut product = 0;

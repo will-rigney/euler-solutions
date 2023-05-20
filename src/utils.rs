@@ -31,3 +31,23 @@ pub fn factorise(n: i32, primes: &mut Vec<i32>) -> BTreeMap<i32, i32> {
         return factors;
     }
 }
+
+/// seive of Eratosthenes using slice of bools
+// todo: consider impl on a slice maybe
+pub fn seive(seive: &mut [bool], max: usize) {
+    let sqrt = ((max - 1) as f32).sqrt() as usize + 1;
+    // initial primes
+    seive[0] = false;
+    seive[1] = false;
+    // seives all the primes by index
+    for i in 2..=sqrt {
+        if seive[i] {
+            let mut j = i * 2;
+            while j < max - 1 {
+                seive[j] = false;
+                j += i;
+            }
+        }
+    }
+
+}

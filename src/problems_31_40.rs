@@ -165,18 +165,7 @@ pub fn problem_35() -> Int {
     // use prime seive to find all primes up to max
     const MAX: usize = 1_000_000;
     let mut seive = [true; MAX + 1];
-    let sqrt = (MAX as f32).sqrt() as usize + 1;
-    seive[0] = false;
-    seive[1] = false;
-    for i in 2..=sqrt {
-        if seive[i] {
-            let mut j = i * 2;
-            while j < MAX {
-                seive[j] = false;
-                j += i;
-            }
-        }
-    }
+    crate::utils::seive(&mut seive, MAX + 1);
 
     // number of circular primes
     let mut n = 0;
@@ -253,18 +242,7 @@ pub fn problem_37() -> Int {
 
     // use prime seive to find all primes up to max
     let mut seive = [true; MAX + 1];
-    let sqrt = (MAX as f32).sqrt() as usize + 1;
-    seive[0] = false;
-    seive[1] = false;
-    for i in 2..=sqrt {
-        if seive[i] {
-            let mut j = i * 2;
-            while j < MAX {
-                seive[j] = false;
-                j += i;
-            }
-        }
-    }
+    crate::utils::seive(&mut seive, MAX);
 
     // problem states there are 11 such numbers
     const N_PRIMES: i32 = 11;
