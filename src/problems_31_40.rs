@@ -1,5 +1,5 @@
-use crate::Int;
-use std::collections::{BTreeSet, HashSet};
+use crate::{Int, utils::is_pandigital};
+use std::{collections::{BTreeSet, HashSet}};
 
 /// number of ways of making £2 in UK currency
 pub fn problem_31() -> Int {
@@ -28,38 +28,6 @@ pub fn problem_31() -> Int {
 
 /// sum of products whose multiplicand/multiplier/product can be written as 1 through 9 pandigital
 pub fn problem_32() -> Int {
-    /// check if a given integer input is pandigital
-    /// n.b. only actually works on unsigned input
-    fn is_pandigital(n: u64) -> bool {
-        let mut n = n;
-        let mut digits = 0;
-        let mut length = 0;
-        // iterate through each digit in n
-        while n > 0 {
-            // get the current digit
-            let digit = n % 10;
-            // 0 doesn't count
-            if digit == 0 {
-                return false;
-            }
-            // set corresponding bit for digit to 1
-            let new_digits = digits | (1 << (digit - 1));
-            // if digits unchanged (i.e. digit has repeated)
-            if digits == new_digits {
-                return false;
-            }
-            digits = new_digits;
-            // next digit
-            n /= 10;
-            length += 1;
-        }
-        // only count results that have all digits 1-9
-        if length < 9 {
-            return false;
-        }
-        // all digit bits should be 1
-        digits == (1 << length) - 1
-    }
 
     /// concat a to b, e.g. 123 + 456 = 123456
     fn concat_int(a: u64, b: u64) -> u64 {
@@ -277,4 +245,39 @@ pub fn problem_37() -> Int {
         n += 2;
     }
     sum as Int
+}
+
+/// largest 1 to 9 pandigital formed as concatenated product of integer with (1, ..., n)
+pub fn problem_38() -> Int {
+    // todo: definitely some cool maths around that could speed this up
+    let mut largest_pandigital = 0;
+    // concatenating x * 1 & x * 2 must be no greater than 9 digits
+    // so x is max 4 digits
+    for x in 1..9999 {
+        let mut concatenated_result: u64 = x;
+        let mut multiplicand = 2;
+
+        while concatenated_result.checked_ilog10().unwrap() + 1 < 9 {
+            let result = x * multiplicand;
+            multiplicand += 1;
+            // concatenate
+            let shift_multiplier = 10_u64.pow(result.checked_ilog10().unwrap() + 1);
+            concatenated_result *= shift_multiplier;
+            concatenated_result += result;
+        }
+
+        // ok now we have a number at least 9 digits
+        // check it's exactly 9
+        if concatenated_result.checked_ilog10().unwrap() > 9 {
+            continue;
+        }
+
+        // now check if it's pandigital and bigger than the current biggest
+        // todo: check order of these conditions
+        if is_pandigital(concatenated_result) && concatenated_result > largest_pandigital {
+            largest_pandigital = concatenated_result;
+        }
+    }
+
+    largest_pandigital as Int
 }

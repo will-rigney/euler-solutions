@@ -51,3 +51,36 @@ pub fn seive(seive: &mut [bool], max: usize) {
     }
 
 }
+
+/// check if a given integer input is pandigital
+/// n.b. only actually works on unsigned input
+pub fn is_pandigital(n: u64) -> bool {
+    let mut n = n;
+    let mut digits = 0;
+    let mut length = 0;
+    // iterate through each digit in n
+    while n > 0 {
+        // get the current digit
+        let digit = n % 10;
+        // 0 doesn't count
+        if digit == 0 {
+            return false;
+        }
+        // set corresponding bit for digit to 1
+        let new_digits = digits | (1 << (digit - 1));
+        // if digits unchanged (i.e. digit has repeated)
+        if digits == new_digits {
+            return false;
+        }
+        digits = new_digits;
+        // next digit
+        n /= 10;
+        length += 1;
+    }
+    // only count results that have all digits 1-9
+    if length < 9 {
+        return false;
+    }
+    // all digit bits should be 1
+    digits == (1 << length) - 1
+}
