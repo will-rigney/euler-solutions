@@ -88,6 +88,7 @@ static PROBLEMS: Lazy<Vec<Problem>> = Lazy::new(|| {
         (36, "sum of numbers less than 1000000 that are palindromes in base 10 \\ base 2:", problem_36),
         (37, "sum of primes that are truncatable in both directions:", problem_37),
         (38, "largest 1 to 9 pandigital formed as concatenated product of integer with (1, ..., n):", problem_38),
+        (39, "right triangle perimeter p with most solutions for a^2 + b^2 = c^2:", problem_39),
     ]
 });
 

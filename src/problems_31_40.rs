@@ -281,3 +281,54 @@ pub fn problem_38() -> Int {
 
     largest_pandigital as Int
 }
+
+pub fn problem_39() -> Int {
+    // a^2 + b^2 = c^2
+    // replace c term in terms of p
+    // a^2 + b^2 = (p - a - b)^2
+    // a^2 + b^2 = p^2 - pa - pb - ap + a^2 + ab - bp + ba + b^2
+    // 0 = p^2 - 2pa - 2pb + 2ab
+
+    // 2pb - 2ab = p^2 - 2pa
+    // 2b(p - a) = p^2 - 2pa
+    // b = (p^2 - 2pa) / 2(p - a)
+
+    fn calculate_b(p: i64, a: i64) -> i64 {
+        let numerator = p * p - 2 * a * p;
+        let denominator = 2 * (p - a);
+        numerator / denominator // n.b. this has to be an integer! no rounding!
+    }
+
+    let mut max_solutions = 0;
+    let mut max_p = 0;
+
+    // only test for even values of p
+
+    for p in (2..1000).step_by(2) {
+        // note: solutions should be distinct (doesn't affect final answer)
+        let mut n_solutions = 0;
+        for a in 1..p {
+            // calculate b
+            let b = calculate_b(p, a);
+            // no negative b (problem somewhere else)
+            if b <= 0 {
+                continue;
+            }
+            // check c is square
+            let c_squared = (a * a + b * b) as f64;
+            let c = c_squared.sqrt();
+            // make sure c is integer
+            if c.fract() != 0.0 {
+                continue;
+            }
+
+            n_solutions += 1;
+        }
+
+        if n_solutions > max_solutions {
+            max_p = p;
+            max_solutions = n_solutions;
+        }
+    }
+    max_p
+}
