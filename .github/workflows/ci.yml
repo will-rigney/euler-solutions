@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install nightly
+    - name: Install rust
       uses: actions-rs/toolchain@v1
       with:
-          toolchain: nightly
+          toolchain: stable
           override: true
     - uses: actions/checkout@v2
     - name: Run

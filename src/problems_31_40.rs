@@ -1,5 +1,5 @@
 use crate::{Int, utils::is_pandigital};
-use std::{collections::{BTreeSet, HashSet}};
+use std::collections::{BTreeSet, HashSet};
 
 /// number of ways of making £2 in UK currency
 pub fn problem_31() -> Int {
@@ -282,6 +282,7 @@ pub fn problem_38() -> Int {
     largest_pandigital as Int
 }
 
+/// right triangle perimeter p with most solutions for a^2 + b^2 = c^2
 pub fn problem_39() -> Int {
     // a^2 + b^2 = c^2
     // replace c term in terms of p
@@ -303,7 +304,6 @@ pub fn problem_39() -> Int {
     let mut max_p = 0;
 
     // only test for even values of p
-
     for p in (2..1000).step_by(2) {
         // note: solutions should be distinct (doesn't affect final answer)
         let mut n_solutions = 0;
