@@ -1,7 +1,7 @@
 # Project Euler Solutions
 
 Solutions to problems available on [Project Euler](https://projecteuler.net),
-implemented in the one true meme language [Rust](https://rust-lang.org/).
+implemented in [Rust](https://rust-lang.org/).
 
 Contains code for solutions but not the actual solutions, trying to avoid
 spoilers for anyone too lazy to at least run the code themselves.
