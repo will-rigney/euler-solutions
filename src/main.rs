@@ -89,6 +89,7 @@ static PROBLEMS: Lazy<Vec<Problem>> = Lazy::new(|| {
         (37, "sum of primes that are truncatable in both directions:", problem_37),
         (38, "largest 1 to 9 pandigital formed as concatenated product of integer with (1, ..., n):", problem_38),
         (39, "right triangle perimeter p with most solutions for a^2 + b^2 = c^2:", problem_39),
+        (40, "d1 * d10 * d100 * d1000 * d10000 * d1000000 of fractional part of Champernowne's constant:", problem_40),
     ]
 });
 

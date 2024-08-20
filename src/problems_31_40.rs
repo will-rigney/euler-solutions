@@ -332,3 +332,27 @@ pub fn problem_39() -> Int {
     }
     max_p
 }
+
+/// d1 * d10 * d100 * d1000 * d10000 * d1000000 of fractional part of Champernowne's constant
+pub fn problem_40() -> i64 {
+    // can this string be created at compile time?
+    // every problem should be solved at compile time anyway
+    let string: String = {
+        let mut string = String::with_capacity(600000);
+        for i in 1..1000000 {
+            string.push_str(&i.to_string());
+        }
+        string
+    };
+
+    // indices of digits
+    let digits: [usize; 7] = [0, 9, 99, 999, 9999, 99999, 999999];
+
+    digits
+        .iter()
+        .map(|n| {
+            let char = string.chars().nth(*n).unwrap(); // something about an error
+            char.to_digit(10).unwrap() as i64
+        })
+        .product()
+}
